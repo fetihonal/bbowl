@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#55061f" />
   <title>b'bowl — Menü</title>
-  <meta name="description" content="b'bowl dijital menü — Market Fresh. Bowl Ready. Bowl'lar, wrap'lar, sandviçler, mezeler, granolalar, smoothie'ler ve taze sıkma sular." />
+  <meta name="description" content="b'bowl dijital menü — bowl'lar, wrap'lar, sandviçler, mezeler, granolalar, smoothie'ler ve taze sıkma sular." />
   <link rel="icon" type="image/png" href="assets/logo-mark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -77,16 +77,17 @@
     }
     .hero-inner {
       position: relative;
-      padding-top: calc(36px + env(safe-area-inset-top));
-      padding-bottom: 28px;
+      padding-top: calc(20px + env(safe-area-inset-top));
+      padding-bottom: 20px;
       display: grid;
-      gap: 22px;
+      gap: 16px;
     }
-    .hero-logo { width: min(64vw, 300px); aspect-ratio: 860 / 264; --src: url(assets/logo-wordmark.png); color: var(--krem); }
+    .hero-head { display: flex; align-items: flex-end; gap: 14px; }
+    .hero-logo { width: min(36vw, 170px); aspect-ratio: 860 / 264; --src: url(assets/logo-wordmark.png); color: var(--krem); }
     .hero-title {
       font-weight: 900;
-      font-size: clamp(64px, 20vw, 168px);
-      line-height: .82;
+      font-size: clamp(28px, 8vw, 52px);
+      line-height: .8;
       letter-spacing: -.04em;
       text-transform: uppercase;
       color: var(--sari);
@@ -95,10 +96,10 @@
     }
     .hero-ring {
       position: absolute;
-      width: clamp(120px, 34vw, 260px);
+      width: clamp(80px, 20vw, 150px);
       aspect-ratio: 486 / 368;
-      right: -6%;
-      top: 46%;
+      right: -4%;
+      top: 18%;
       --src: url(assets/logo-mark.png);
       color: var(--neon);
       transform: rotate(-14deg);
@@ -371,7 +372,7 @@
     }
     .foot { display: grid; gap: 26px; }
     @media (min-width: 820px) { .foot { grid-template-columns: auto 1fr; gap: 56px; align-items: start; } }
-    .foot-logo { width: 150px; aspect-ratio: 652 / 698; --src: url(assets/logo-stacked.png); color: var(--krem); }
+    .foot-logo { width: 150px; aspect-ratio: 860 / 264; --src: url(assets/logo-wordmark.png); color: var(--krem); }
     .foot h3 { font-family: var(--hand); font-size: 28px; color: var(--neon); margin-bottom: 10px; line-height: 1.1; }
     .foot ul { list-style: none; display: grid; gap: 8px; font-size: 13px; line-height: 1.55; color: rgba(252, 241, 231, .78); }
     .foot ul li::before { content: "●"; color: var(--sari); font-size: 8px; vertical-align: 2px; margin-right: 8px; }
@@ -403,8 +404,10 @@
   <header class="hero grid-bg">
     <span class="hero-ring logo-mask" aria-hidden="true"></span>
     <div class="wrap hero-inner">
-      <h1 class="hero-logo logo-mask" role="img" aria-label="b'bowl"></h1>
-      <div class="hero-title" aria-hidden="true">Menü</div>
+      <div class="hero-head">
+        <h1 class="hero-logo logo-mask" role="img" aria-label="b'bowl"></h1>
+        <div class="hero-title" aria-hidden="true">Menü</div>
+      </div>
       <label class="search" id="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="search" id="q" placeholder="Ürün ya da içerik ara… (ör. tavuk, avokado)" autocomplete="off" aria-label="Menüde ara" />
@@ -427,7 +430,7 @@
   <footer>
     <div class="wrap">
       <div class="foot">
-        <span class="foot-logo logo-mask" role="img" aria-label="b'bowl — Market Fresh. Bowl Ready."></span>
+        <span class="foot-logo logo-mask" role="img" aria-label="b'bowl"></span>
         <div>
           <h3>Own your taste.</h3>
           <ul>
