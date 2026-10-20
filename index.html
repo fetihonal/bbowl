@@ -2,879 +2,673 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>B'BOWL — daily durak.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#55061f" />
+  <title>b'bowl — Menü</title>
+  <meta name="description" content="b'bowl dijital menü — Market Fresh. Bowl Ready. Bowl'lar, wrap'lar, sandviçler, mezeler, granolalar, smoothie'ler ve taze sıkma sular." />
+  <link rel="icon" type="image/png" href="assets/logo-mark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green: #1A4731;
-      --green-light: #225C3D;
-      --yellow: #FEC700;
-      --yellow-dark: #D9A900;
-      --white: #F9F8F2;
-      --text: #1A4731;
+      /* Marka paleti */
+      --bordo: #55061f;
+      --bordo-2: #6a1230;
+      --krem: #fcf1e7;
+      --krem-2: #fffaf4;
+      --mavi: #c4dff4;
+      --yesil: #073a33;
+      --neon: #eeff00;
+      --sari: #ffc800;
+
+      --ink: var(--bordo);
+      --muted: rgba(85, 6, 31, .68);
+      --line: rgba(85, 6, 31, .12);
+
+      --display: 'Montserrat', system-ui, sans-serif;
+      --hand: 'Fuzzy Bubbles', 'Comic Sans MS', cursive;
+
+      --r-lg: 28px;
+      --r-md: 20px;
+      --r-sm: 14px;
+      --gutter: 16px;
+      --max: 1180px;
+      --nav-h: 64px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
     body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--white);
-      color: var(--text);
+      font-family: var(--display);
+      font-weight: 500;
+      background: var(--krem);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* ── NAV ─────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5vw;
-      height: 70px;
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Logoyu herhangi bir renkte basmak için maske */
+    .logo-mask {
+      display: block;
+      background: currentColor;
+      -webkit-mask: var(--src) center / contain no-repeat;
+              mask: var(--src) center / contain no-repeat;
     }
 
-    .nav-logo img { height: 200px; }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
+    /* Markanın yuvarlak kare ızgara deseni */
+    .grid-bg {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Crect x='3' y='3' width='50' height='50' rx='13' fill='%23ffffff' fill-opacity='.06'/%3E%3C/svg%3E");
+      background-size: 56px 56px;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--white);
-      font-weight: 700;
-      font-size: .95rem;
-      letter-spacing: .03em;
-      transition: color .2s;
-    }
-
-    .nav-links a:hover { color: var(--yellow); }
-
-    .nav-cta {
-      background: var(--yellow);
-      color: var(--green) !important;
-      padding: .45rem 1.2rem;
-      border-radius: 50px;
-    }
-
-    .nav-cta:hover { background: var(--yellow-dark); color: var(--green) !important; }
-
-    /* ── HERO ────────────────────────────── */
+    /* ── HERO ───────────────────────────── */
     .hero {
-      min-height: 100vh;
-      background: var(--green);
+      position: relative;
+      background-color: var(--bordo);
+      color: var(--krem);
+      overflow: hidden;
+      border-radius: 0 0 var(--r-lg) var(--r-lg);
+    }
+    .hero-inner {
+      position: relative;
+      padding-top: calc(36px + env(safe-area-inset-top));
+      padding-bottom: 28px;
+      display: grid;
+      gap: 22px;
+    }
+    .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    @media (max-width: 479px) { .hero-top small { display: none; } }
+    .hero-top small { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--mavi); }
+    .hero-logo { width: min(64vw, 300px); aspect-ratio: 860 / 264; --src: url(assets/logo-wordmark.png); color: var(--krem); }
+    .hero-tag { font-weight: 700; font-size: clamp(18px, 4.6vw, 26px); letter-spacing: -.01em; }
+    .hero-title {
+      font-weight: 900;
+      font-size: clamp(64px, 20vw, 168px);
+      line-height: .82;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+      color: var(--sari);
+      position: relative;
+      width: fit-content;
+    }
+    .hero-title .hand {
+      display: block;
+      margin-top: .3em;
+      font-family: var(--hand);
+      font-size: .24em;
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--neon);
+      transform: rotate(-4deg);
+      transform-origin: left center;
+      white-space: nowrap;
+    }
+    .hero-ring {
+      position: absolute;
+      width: clamp(120px, 34vw, 260px);
+      aspect-ratio: 486 / 368;
+      right: -6%;
+      top: 46%;
+      --src: url(assets/logo-mark.png);
+      color: var(--neon);
+      transform: rotate(-14deg);
+      pointer-events: none;
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .hero-meta span {
+      font-size: 12px; font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(252, 241, 231, .1);
+      border: 1px solid rgba(252, 241, 231, .18);
+    }
+
+    .search {
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 5vw 60px;
+      background: var(--krem);
+      border-radius: 999px;
+      padding: 0 16px;
+      height: 52px;
+      color: var(--bordo);
+      max-width: 520px;
+    }
+    .search svg { flex: none; width: 20px; height: 20px; opacity: .6; }
+    .search input {
+      flex: 1; min-width: 0;
+      border: 0; outline: 0; background: transparent;
+      font: 600 16px var(--display);
+      color: var(--bordo);
+      padding: 0 10px;
+    }
+    .search input::placeholder { color: var(--muted); font-weight: 500; }
+    .search:focus-within { box-shadow: 0 0 0 3px var(--neon); }
+    .search-clear {
+      border: 0; background: var(--bordo); color: var(--krem);
+      width: 26px; height: 26px; border-radius: 50%;
+      font: 700 14px var(--display); cursor: pointer;
+      display: none;
+    }
+    .search.has-value .search-clear { display: grid; place-items: center; }
+
+    /* ── KATEGORİ NAV ───────────────────── */
+    .cats {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(252, 241, 231, .92);
+      -webkit-backdrop-filter: blur(12px);
+              backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+    .cats.stuck { border-bottom-color: var(--line); }
+    .cats-scroll {
+      display: flex; gap: 8px;
+      height: var(--nav-h);
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 var(--gutter);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .cats-scroll::-webkit-scrollbar { display: none; }
+    .cats a {
+      flex: none;
+      text-decoration: none;
+      color: var(--bordo);
+      font-size: 14px; font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: var(--krem-2);
+      white-space: nowrap;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .cats a.active { background: var(--bordo); color: var(--krem); border-color: var(--bordo); }
+    .cats a[hidden] { display: none; }
+
+    /* ── BÖLÜMLER ───────────────────────── */
+    main { padding: 20px 0 40px; }
+    .section { margin-top: 28px; }
+    .section:first-child { margin-top: 8px; }
+    .section[hidden] { display: none; }
+
+    .sec-head {
       position: relative;
       overflow: hidden;
+      border-radius: var(--r-lg);
+      padding: 26px 22px 24px;
+      margin-bottom: 14px;
+      display: flex; flex-direction: column; gap: 6px;
     }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: rgba(254,199,0,.06);
-      top: -150px; right: -150px;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: rgba(254,199,0,.04);
-      bottom: -100px; left: -80px;
-    }
-
-    .hero-inner { position: relative; z-index: 1; max-width: 760px; }
-
-    .hero-logo {
-      width: min(480px, 80vw);
-      margin-bottom: 2rem;
-    }
-
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      color: rgba(250,250,245,.75);
-      font-weight: 600;
-      margin-bottom: 2.5rem;
-      letter-spacing: .04em;
-    }
-
-    .hero-tagline span { color: var(--yellow); }
-
-    .btn {
-      display: inline-block;
-      padding: .85rem 2.4rem;
-      border-radius: 50px;
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: transform .2s, background .2s;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary { background: var(--yellow); color: var(--green); }
-    .btn-primary:hover { background: var(--yellow-dark); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--yellow);
-      border: 2px solid var(--yellow);
-      margin-left: 1rem;
-    }
-
-    .btn-outline:hover { background: rgba(254,199,0,.1); }
-
-    /* ── SECTION BASE ─────────────────────── */
-    section { padding: 90px 5vw; }
-
-    .section-label {
-      display: inline-block;
-      background: var(--yellow);
-      color: var(--green);
-      font-size: .75rem;
+    .sec-head h2 {
       font-weight: 900;
-      letter-spacing: .12em;
+      font-size: clamp(34px, 9vw, 64px);
+      line-height: .9;
+      letter-spacing: -.035em;
       text-transform: uppercase;
-      padding: .3rem .9rem;
-      border-radius: 50px;
-      margin-bottom: 1.2rem;
+      position: relative;
     }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.2rem;
-    }
-
-    p.lead {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      opacity: .75;
-      max-width: 560px;
-    }
-
-    /* ── ABOUT ───────────────────────────── */
-    .about {
-      background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5vw;
-      align-items: center;
-    }
-
-    .about-visual {
-      background: var(--green);
-      border-radius: 24px;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem;
-    }
-
-    .about-visual img { width: 100%; max-width: 340px; }
-
-    .about-stats {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .stat { }
-    .stat-num {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--green);
+    .sec-head .hand {
+      font-family: var(--hand);
+      font-size: clamp(20px, 5vw, 28px);
       line-height: 1;
+      position: relative;
+    }
+    .sec-head p { font-size: 14px; font-weight: 600; opacity: .85; position: relative; max-width: 560px; }
+    .sec-head .count {
+      position: absolute; top: 18px; right: 18px;
+      font-size: 12px; font-weight: 800;
+      padding: 6px 10px; border-radius: 999px;
+      background: rgba(255, 255, 255, .16);
+    }
+    .sec-head .ring {
+      position: absolute;
+      width: 130px; aspect-ratio: 486 / 368;
+      right: -24px; bottom: -34px;
+      --src: url(assets/logo-mark.png);
+      opacity: .9;
+      transform: rotate(-12deg);
     }
 
-    .stat-num span { color: var(--yellow-dark); }
+    .c-bordo .sec-head { background-color: var(--bordo); color: var(--krem); }
+    .c-bordo .sec-head .hand { color: var(--mavi); }
+    .c-bordo .sec-head .ring { color: var(--bordo-2); }
+    .c-yesil .sec-head { background-color: var(--yesil); color: var(--krem); }
+    .c-yesil .sec-head .hand { color: var(--neon); }
+    .c-yesil .sec-head .ring { color: #0e4d44; }
+    .c-mavi .sec-head { background-color: var(--mavi); color: var(--bordo); }
+    .c-mavi .sec-head .hand { color: var(--yesil); }
+    .c-mavi .sec-head .ring { color: #b0d2ec; }
+    .c-mavi .sec-head .count, .c-sari .sec-head .count, .c-neon .sec-head .count { background: rgba(85, 6, 31, .1); }
+    .c-sari .sec-head { background-color: var(--sari); color: var(--bordo); }
+    .c-sari .sec-head .hand { color: var(--yesil); }
+    .c-sari .sec-head .ring { color: #f2b800; }
+    .c-neon .sec-head { background-color: var(--neon); color: var(--bordo); }
+    .c-neon .sec-head .hand { color: var(--yesil); }
+    .c-neon .sec-head .ring { color: #dcec00; }
 
-    .stat-label {
-      font-size: .85rem;
-      font-weight: 700;
-      opacity: .6;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-    }
-
-    /* ── MENU ────────────────────────────── */
-    .menu { background: var(--green); }
-
-    .menu h2 { color: var(--white); }
-    .menu .section-label { background: rgba(254,199,0,.15); color: var(--yellow); }
-    .menu p.lead { color: rgba(250,250,245,.65); }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .menu-card {
-      background: var(--green-light);
-      border-radius: 20px;
+    /* Görsel alanı — boşsa marka desenli yer tutucu */
+    .ph {
+      position: relative;
       overflow: hidden;
-      transition: transform .25s;
+      background-color: #f5e6d8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect x='2' y='2' width='36' height='36' rx='10' fill='%2355061f' fill-opacity='.04'/%3E%3C/svg%3E");
+      background-size: 40px 40px;
+    }
+    .ph::after {
+      content: "";
+      position: absolute; inset: 0; margin: auto;
+      width: 30%; max-width: 72px; aspect-ratio: 486 / 368;
+      background: var(--bordo);
+      opacity: .12;
+      -webkit-mask: url(assets/logo-mark.png) center / contain no-repeat;
+              mask: url(assets/logo-mark.png) center / contain no-repeat;
+    }
+    .ph.has-img::after { display: none; }
+    .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .c-mavi .ph { background-color: #dcebf7; }
+    .c-yesil .ph { background-color: #e3ebe5; }
+    .c-sari .ph { background-color: #fdeec0; }
+    .c-neon .ph { background-color: #f6fbc4; }
+
+    /* Kart düzeni */
+    .cards { display: grid; gap: 14px; grid-template-columns: 1fr; }
+    @media (min-width: 620px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 980px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+    .card {
+      background: var(--krem-2);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line);
+    }
+    .card .ph { aspect-ratio: 4 / 3; }
+    .card-body { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .name { font-weight: 800; font-size: 18px; line-height: 1.2; letter-spacing: -.01em; }
+    .price {
+      flex: none;
+      font-weight: 900; font-size: 20px; letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+    .price.soon { font-size: 13px; font-weight: 700; color: var(--muted); padding-top: 4px; }
+    .desc { font-size: 14px; line-height: 1.5; color: var(--muted); }
+    .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 2px; }
+    .meta span {
+      font-size: 12px; font-weight: 700;
+      padding: 5px 10px; border-radius: 999px;
+      background: var(--krem);
+      border: 1px solid var(--line);
+    }
+    .meta .p { background: var(--mavi); border-color: transparent; }
+    .new {
+      display: inline-block;
+      vertical-align: 3px;
+      margin-left: 6px;
+      font: 700 12px/1 var(--hand);
+      padding: 5px 8px 4px;
+      border-radius: 999px;
+      background: var(--neon);
+      color: var(--bordo);
+      transform: rotate(-3deg);
     }
 
-    .menu-card:hover { transform: translateY(-6px); }
-
-    .menu-card-img {
-      background: rgba(254,199,0,.12);
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-    }
-
-    .menu-card-body { padding: 1.4rem; }
-
-    .menu-card-tag {
-      font-size: .7rem;
-      font-weight: 800;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--yellow);
-      margin-bottom: .5rem;
-    }
-
-    .menu-card h3 {
-      color: var(--white);
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: .5rem;
-    }
-
-    .menu-card p {
-      color: rgba(250,250,245,.55);
-      font-size: .88rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .menu-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .menu-price {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--yellow);
-    }
-
-    .btn-sm {
-      padding: .4rem 1rem;
-      font-size: .85rem;
-      background: var(--yellow);
-      color: var(--green);
-      border-radius: 50px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: background .2s;
-    }
-
-    .btn-sm:hover { background: var(--yellow-dark); }
-
-    /* ── HOW IT WORKS ─────────────────────── */
-    .how { background: #f4f0e6; }
-
-    .steps {
+    /* Satır düzeni */
+    .rows {
+      background: var(--krem-2);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+      grid-template-columns: 1fr;
     }
-
-    .step {
-      text-align: center;
-    }
-
-    .step-icon {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 1.2rem;
-    }
-
-    .step h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: .5rem;
-    }
-
-    .step p {
-      font-size: .88rem;
-      opacity: .65;
-      line-height: 1.6;
-    }
-
-    /* ── TESTIMONIALS ─────────────────────── */
-    .reviews { background: var(--white); }
-
-    .reviews-grid {
+    @media (min-width: 900px) { .rows { grid-template-columns: 1fr 1fr; column-gap: 24px; padding: 0 12px; } }
+    .row {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+      grid-template-columns: 72px 1fr auto;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border-top: 1px solid var(--line);
     }
+    .row:first-child { border-top: 0; }
+    @media (min-width: 900px) { .row:nth-child(2) { border-top: 0; } }
+    .row .ph { width: 72px; height: 72px; border-radius: var(--r-sm); }
+    .row .ph::after { width: 52%; }
+    .row .name { font-size: 16px; }
+    .row .desc { font-size: 13px; margin-top: 3px; }
+    .row .meta { margin-top: 8px; }
+    .row .price { font-size: 17px; padding-top: 1px; }
 
-    .review-card {
-      background: var(--green);
-      border-radius: 20px;
-      padding: 2rem;
-      color: var(--white);
+    /* Kendi bowlunu oluştur */
+    .kbo { display: grid; gap: 14px; }
+    @media (min-width: 900px) { .kbo { grid-template-columns: 1fr 1.15fr; align-items: start; } }
+    .kbo-visual { border-radius: var(--r-md); aspect-ratio: 4 / 3; border: 1px solid var(--line); }
+    .steps { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .steps li {
+      list-style: none;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700;
+      padding: 6px 12px 6px 6px;
+      border-radius: 999px;
+      background: var(--krem-2);
+      border: 1px solid var(--line);
     }
-
-    .stars { color: var(--yellow); font-size: 1.1rem; margin-bottom: 1rem; letter-spacing: .1em; }
-
-    .review-card p {
-      font-size: .95rem;
-      line-height: 1.7;
-      opacity: .8;
-      margin-bottom: 1.5rem;
+    .steps b {
+      display: grid; place-items: center;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--bordo); color: var(--krem);
+      font-size: 12px; font-weight: 900;
     }
-
-    .reviewer {
-      display: flex;
-      align-items: center;
-      gap: .8rem;
+    .kbo .rows { padding: 0; grid-template-columns: 1fr; }
+    .kbo .row { grid-template-columns: 1fr auto; padding: 14px 16px; border-top: 1px solid var(--line); }
+    .kbo .row:first-child { border-top: 0; }
+    .add {
+      display: inline-block; margin-left: 6px;
+      font-size: 12px; font-weight: 800;
+      padding: 3px 8px; border-radius: 999px;
+      background: var(--mavi);
+      vertical-align: 2px;
     }
-
-    .reviewer-avatar {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: var(--yellow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      color: var(--green);
-      font-size: 1rem;
+    .extras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+    .extra {
+      background: var(--neon);
+      border-radius: var(--r-sm);
+      padding: 12px 10px;
+      display: flex; flex-direction: column; gap: 4px;
     }
+    .extra span { font-size: 13px; font-weight: 700; line-height: 1.2; }
+    .extra strong { font-size: 18px; font-weight: 900; }
 
-    .reviewer-name { font-weight: 800; font-size: .9rem; }
-    .reviewer-sub { font-size: .78rem; opacity: .55; }
-
-    /* ── LOCATION ────────────────────────── */
-    .location {
-      background: var(--green);
+    .empty {
+      display: none;
       text-align: center;
+      padding: 60px 20px;
     }
+    .empty.show { display: block; }
+    .empty .hand { font-family: var(--hand); font-size: 28px; }
+    .empty p { color: var(--muted); margin-top: 6px; font-size: 15px; }
 
-    .location h2 { color: var(--white); }
-    .location .section-label { background: rgba(254,199,0,.15); color: var(--yellow); }
-    .location p.lead { color: rgba(250,250,245,.65); margin: 0 auto 2.5rem; }
-
-    .location-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      margin-top: 3rem;
-    }
-
-    .location-card {
-      background: var(--green-light);
-      border-radius: 20px;
-      padding: 2rem 2.5rem;
-      text-align: left;
-      flex: 1;
-      min-width: 240px;
-      max-width: 320px;
-    }
-
-    .location-card h3 {
-      color: var(--yellow);
-      font-size: 1.1rem;
-      font-weight: 900;
-      margin-bottom: .5rem;
-    }
-
-    .location-card p {
-      color: rgba(250,250,245,.65);
-      font-size: .9rem;
-      line-height: 1.7;
-    }
-
-    .location-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    /* ── FOOTER ──────────────────────────── */
+    /* ── FOOTER ─────────────────────────── */
     footer {
-      background: #0E2A1C;
-      padding: 50px 5vw 30px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 3rem;
+      background-color: var(--bordo);
+      color: var(--krem);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      padding: 44px 0 calc(32px + env(safe-area-inset-bottom));
     }
-
-    .footer-brand img { height: 34px; margin-bottom: 1rem; }
-
-    .footer-brand p {
-      color: rgba(250,250,245,.45);
-      font-size: .88rem;
-      line-height: 1.7;
-      max-width: 240px;
+    .foot { display: grid; gap: 26px; }
+    @media (min-width: 820px) { .foot { grid-template-columns: auto 1fr; gap: 56px; align-items: start; } }
+    .foot-logo { width: 150px; aspect-ratio: 652 / 698; --src: url(assets/logo-stacked.png); color: var(--krem); }
+    .foot h3 { font-family: var(--hand); font-size: 28px; color: var(--neon); margin-bottom: 10px; line-height: 1.1; }
+    .foot ul { list-style: none; display: grid; gap: 8px; font-size: 13px; line-height: 1.55; color: rgba(252, 241, 231, .78); }
+    .foot ul li::before { content: "●"; color: var(--sari); font-size: 8px; vertical-align: 2px; margin-right: 8px; }
+    .foot-bottom {
+      margin-top: 30px; padding-top: 18px;
+      border-top: 1px solid rgba(252, 241, 231, .16);
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+      font-size: 12px; font-weight: 600; color: rgba(252, 241, 231, .6);
     }
+    .palette { display: flex; gap: 6px; }
+    .palette i { width: 14px; height: 14px; border-radius: 4px; display: block; }
 
-    footer h4 {
-      color: var(--yellow);
-      font-size: .8rem;
-      font-weight: 900;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
+    .to-top {
+      position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 60;
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 0; cursor: pointer;
+      background: var(--bordo); color: var(--krem);
+      box-shadow: 0 8px 24px rgba(85, 6, 31, .28);
+      display: grid; place-items: center;
+      opacity: 0; transform: translateY(12px); pointer-events: none;
+      transition: opacity .25s, transform .25s;
     }
-
-    .footer-links { list-style: none; }
-
-    .footer-links li + li { margin-top: .6rem; }
-
-    .footer-links a {
-      color: rgba(250,250,245,.5);
-      text-decoration: none;
-      font-size: .9rem;
-      transition: color .2s;
-    }
-
-    .footer-links a:hover { color: var(--yellow); }
-
-    .footer-bottom {
-      grid-column: 1 / -1;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,.07);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-bottom p {
-      color: rgba(250,250,245,.3);
-      font-size: .8rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-links a {
-      color: rgba(250,250,245,.35);
-      font-size: .85rem;
-      text-decoration: none;
-      transition: color .2s;
-    }
-
-    .social-links a:hover { color: var(--yellow); }
-
-    /* ── RESPONSIVE ───────────────────────── */
-    @media (max-width: 768px) {
-      .about {
-        grid-template-columns: 1fr;
-        padding: 60px 5vw;
-      }
-
-      .about-visual { aspect-ratio: 16/9; }
-
-      footer {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-
-      .nav-links { display: none; }
-    }
-
-    /* ── SCROLL REVEAL ────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+    .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+    .to-top svg { width: 20px; height: 20px; }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#"><img src="bboowwlllll.svg" alt="B'BOWL" /></a>
-    <ul class="nav-links">
-      <li><a href="#about">Hakkımızda</a></li>
-      <li><a href="#menu">Menü</a></li>
-      <li><a href="#how">Nasıl Çalışır</a></li>
-      <li><a href="#location">Şubeler</a></li>
-      <li><a href="#menu" class="nav-cta">Sipariş Ver</a></li>
-    </ul>
+  <header class="hero grid-bg">
+    <span class="hero-ring logo-mask" aria-hidden="true"></span>
+    <div class="wrap hero-inner">
+      <div class="hero-top">
+        <h1 class="hero-logo logo-mask" role="img" aria-label="b'bowl"></h1>
+        <small>B'Fast · B'Ready · B'Urban</small>
+      </div>
+      <div>
+        <p class="hero-tag">Market Fresh. Bowl Ready.</p>
+        <div class="hero-meta">
+          <span id="total-count">92 lezzet</span>
+          <span>Kalori &amp; protein bilgili</span>
+        </div>
+      </div>
+      <div class="hero-title" aria-hidden="true">Menü<span class="hand">taze. günlük. hazır.</span></div>
+      <label class="search" id="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="q" placeholder="Ürün ya da içerik ara… (ör. tavuk, avokado)" autocomplete="off" aria-label="Menüde ara" />
+        <button type="button" class="search-clear" id="q-clear" aria-label="Aramayı temizle">×</button>
+      </label>
+    </div>
+  </header>
+
+  <nav class="cats" id="cats" aria-label="Kategoriler">
+    <div class="cats-scroll" id="cats-scroll"></div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <img class="hero-logo" src="image.png" alt="B'BOWL — daily durak." />
-      <p class="hero-tagline">
-        Her gün <span>taze</span>, her gün <span>lezzetli</span>.<br />
-        Bowl'unuzu kendiniz oluşturun.
-      </p>
-      <a href="#menu" class="btn btn-primary">Menüyü Keşfet</a>
-      <a href="#about" class="btn btn-outline">Biz Kimiz?</a>
-    </div>
-  </section>
+  <main class="wrap" id="menu"></main>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-visual">
-      <img src="bboowwlllll.svg" alt="B'BOWL logo" />
-    </div>
-    <div class="reveal">
-      <span class="section-label">Hakkımızda</span>
-      <h2>Günlük durağın, sağlıklı lezzeti.</h2>
-      <p class="lead">
-        B'BOWL, taze ve besleyici malzemelerle hazırlanan özelleştirilebilir bowl'lar sunan günlük bir durak noktasıdır.
-        Hızlı ama sağlıklı, basit ama lezzetli — her gün gelmek isteyeceğin bir yer.
-      </p>
-      <div class="about-stats">
-        <div class="stat">
-          <div class="stat-num">20<span>+</span></div>
-          <div class="stat-label">Malzeme Seçeneği</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">100<span>%</span></div>
-          <div class="stat-label">Taze Ürünler</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">5<span>dk</span></div>
-          <div class="stat-label">Hazırlama Süresi</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="wrap empty" id="empty">
+    <div class="hand">Hmm, bulamadık.</div>
+    <p>Başka bir kelime dene — ör. “falafel”, “granola”, “shot”.</p>
+  </div>
 
-  <!-- MENU -->
-  <section class="menu" id="menu">
-    <span class="section-label">Menü</span>
-    <h2>Bugün ne yemek istersin?</h2>
-    <p class="lead">Taban seç, malzemeleri ekle, sos seç — bowl'un hazır.</p>
-
-    <div class="menu-grid">
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🍗</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Tavuklu</div>
-          <h3>Izgara Tavuk Bowl</h3>
-          <p>Kinoa tabanı, ızgara tavuk dilimi, roka, domates, mısır, ev yapımı yoğurt-dereotu sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺210</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🥙</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Köfteli</div>
-          <h3>Köfte Bowl</h3>
-          <p>Bulgur tabanı, ızgara dana köfte, közlenmiş biber, sumak soğan, nar ekşili sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺235</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🐟</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Balıklı</div>
-          <h3>Somon Bowl</h3>
-          <p>Pirinç tabanı, fırın somon, salatalık, avokado, susam, ponzu sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺265</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🦐</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Deniz Ürünleri</div>
-          <h3>Karides Bowl</h3>
-          <p>Kuskus tabanı, sarımsaklı karides, ıspanak, kiraz domates, limonlu tereyağ sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺255</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🥩</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Et Severler</div>
-          <h3>Dana Kavurma Bowl</h3>
-          <p>Bulgur tabanı, dana kavurma, kızarmış soğan, roka, chimichurri sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺250</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🌱</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Vegan</div>
-          <h3>Falafel Bowl</h3>
-          <p>Karabuğday tabanı, ev yapımı falafel, pancar, nohut, tahini-limon sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺185</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🍳</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Kahvaltılık</div>
-          <h3>Yumurtalı Bowl</h3>
-          <p>Pirinç tabanı, poşe yumurta, avokado, ıspanak, feta, hollandaise sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺190</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="menu-card reveal">
-        <div class="menu-card-img">🫙</div>
-        <div class="menu-card-body">
-          <div class="menu-card-tag">Ton Balıklı</div>
-          <h3>Ton Bowl</h3>
-          <p>Kinoa tabanı, ton balığı, edamame, salatalık, nori, wasabi-susam sos.</p>
-          <div class="menu-card-footer">
-            <span class="menu-price">₺220</span>
-            <a href="#" class="btn-sm">Seç</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how" id="how">
-    <div style="text-align:center; max-width:600px; margin:0 auto;">
-      <span class="section-label">Nasıl Çalışır</span>
-      <h2>3 adımda bowl'un hazır.</h2>
-      <p class="lead" style="margin:0 auto;">Hızlı, kolay, kişiselleştirilmiş. Günlük durağında bile bekleme yok.</p>
-    </div>
-
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-icon">🌾</div>
-        <h3>Taban Seç</h3>
-        <p>Kinoa, bulgur, pirinç, karabuğday veya yeşillik tabanlarından birini seç.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-icon">🥦</div>
-        <h3>Malzeme Ekle</h3>
-        <p>Protein, sebze ve toppinglerini kendin belirle. 20'den fazla seçenek.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-icon">🫙</div>
-        <h3>Sos Seç</h3>
-        <p>8 farklı ev yapımı sos ile bowl'una son dokunuşu yap.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-icon">🎉</div>
-        <h3>Keyifle Ye</h3>
-        <p>5 dakika içinde hazırlanan taze bowl'un seni bekliyor.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="reviews" id="reviews">
-    <span class="section-label">Yorumlar</span>
-    <h2>Müşterilerimiz ne diyor?</h2>
-
-    <div class="reviews-grid">
-      <div class="review-card reveal">
-        <div class="stars">★★★★★</div>
-        <p>"Her öğlen B'BOWL'a uğruyorum. Green Bowl favorim — hem doyurucu hem hafif. Gerçekten daily durak oldu benim için!"</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">A</div>
-          <div>
-            <div class="reviewer-name">Ayşe K.</div>
-            <div class="reviewer-sub">Düzenli Müşteri</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card reveal">
-        <div class="stars">★★★★★</div>
-        <p>"Kendi bowl'umu oluşturma seçeneği harika. Malzemelerin tazeliği ve sunumu çok kaliteli. Fiyat-performans mükemmel."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">M</div>
-          <div>
-            <div class="reviewer-name">Mert D.</div>
-            <div class="reviewer-sub">Foodie</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card reveal">
-        <div class="stars">★★★★★</div>
-        <p>"Veganlar için seçenek çok fazla ve gerçekten lezzetli. Earth Bowl'u denedim, tahini sosu harikaydı!"</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">Z</div>
-          <div>
-            <div class="reviewer-name">Zeynep T.</div>
-            <div class="reviewer-sub">Vegan</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section class="location" id="location">
-    <span class="section-label">Şubeler</span>
-    <h2 style="color:var(--white);">Bizi bul.</h2>
-    <p class="lead">Sana en yakın B'BOWL'a uğra. Yeni şubeler geliyor!</p>
-
-    <div class="location-cards">
-      <div class="location-card reveal">
-        <div class="location-icon">📍</div>
-        <h3>Beşiktaş</h3>
-        <p>Barbaros Bulvarı No:42<br />Beşiktaş, İstanbul</p>
-        <p style="margin-top:.8rem; color:var(--yellow); font-size:.8rem; font-weight:800;">08:00 – 22:00</p>
-      </div>
-      <div class="location-card reveal">
-        <div class="location-icon">📍</div>
-        <h3>Kadıköy</h3>
-        <p>Moda Caddesi No:15<br />Kadıköy, İstanbul</p>
-        <p style="margin-top:.8rem; color:var(--yellow); font-size:.8rem; font-weight:800;">08:00 – 22:00</p>
-      </div>
-      <div class="location-card reveal">
-        <div class="location-icon">📍</div>
-        <h3>Nişantaşı</h3>
-        <p>Teşvikiye Caddesi No:88<br />Nişantaşı, İstanbul</p>
-        <p style="margin-top:.8rem; color:var(--yellow); font-size:.8rem; font-weight:800;">09:00 – 22:00</p>
-      </div>
-      <div class="location-card reveal" style="background:rgba(254,199,0,.08); border:1.5px dashed rgba(254,199,0,.3);">
-        <div class="location-icon">🚀</div>
-        <h3 style="color:rgba(250,250,245,.5);">Yakında</h3>
-        <p>Yeni şube çalışmaları devam ediyor. Güncellemeler için bizi takip edin.</p>
-        <p style="margin-top:.8rem; color:var(--yellow); font-size:.8rem; font-weight:800;">2025 Q3</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer>
-    <div class="footer-brand">
-      <img src="image.png" alt="B'BOWL" />
-      <p>Günlük durağın, taze bowl'u. Her gün sağlıklı, her gün lezzetli.</p>
-    </div>
-
-    <div>
-      <h4>Menü</h4>
-      <ul class="footer-links">
-        <li><a href="#menu">Green Bowl</a></li>
-        <li><a href="#menu">Chicken Power</a></li>
-        <li><a href="#menu">Tuna Bliss</a></li>
-        <li><a href="#menu">Earth Bowl</a></li>
-        <li><a href="#menu">Kendi Bowl'un</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h4>İletişim</h4>
-      <ul class="footer-links">
-        <li><a href="#">info@bbowl.com.tr</a></li>
-        <li><a href="#">0850 000 00 00</a></li>
-        <li><a href="#location">Şubeler</a></li>
-        <li><a href="#">Kariyer</a></li>
-        <li><a href="#">Franchise</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2025 B'BOWL. Tüm hakları saklıdır.</p>
-      <div class="social-links">
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
-        <a href="#">Twitter</a>
+    <div class="wrap">
+      <div class="foot">
+        <span class="foot-logo logo-mask" role="img" aria-label="b'bowl — Market Fresh. Bowl Ready."></span>
+        <div>
+          <h3>Own your taste.</h3>
+          <ul>
+            <li>Kalori ve protein değerleri porsiyon başınadır; reçete gramajlarından hesaplanmış tahmini değerlerdir (±%10–15).</li>
+            <li>Kendi bowlunu oluştur tabaklarının kalorisi seçilen tahıl, garnitür ve sosa göre değişir.</li>
+            <li>Alerjen bilgisi için lütfen ekibimize danışın.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>Menü güncelleme: 15 Ekim 2026</span>
+        <span class="palette" aria-hidden="true">
+          <i style="background:#fcf1e7"></i><i style="background:#c4dff4"></i><i style="background:#073a33;outline:1px solid rgba(252,241,231,.2)"></i><i style="background:#eeff00"></i><i style="background:#ffc800"></i>
+        </span>
       </div>
     </div>
   </footer>
 
+  <button class="to-top" id="to-top" type="button" aria-label="Yukarı çık">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="menu.js"></script>
   <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    (function () {
+      const MENU = window.MENU || [];
+      const $ = (s) => document.querySelector(s);
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      const num = (n) => typeof n === "number" ? n.toLocaleString("tr-TR") : esc(n);
+      const fold = (s) => String(s || "").toLocaleLowerCase("tr");
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      const price = (u) => u.fiyat == null
+        ? `<span class="price soon">Yakında</span>`
+        : `<span class="price">${num(u.fiyat)} ₺</span>`;
 
-    // Stagger children
-    document.querySelectorAll('.menu-grid, .steps, .reviews-grid, .location-cards').forEach(grid => {
-      [...grid.querySelectorAll('.reveal')].forEach((el, i) => {
-        el.style.transitionDelay = (i * 0.1) + 's';
-      });
-    });
+      const newBadge = (u) => u.yeni ? `<span class="new">yeni</span>` : "";
+
+      const meta = (u) => {
+        const out = [];
+        if (u.porsiyon) out.push(`<span>${esc(u.porsiyon)}</span>`);
+        if (u.kcal != null) out.push(`<span>${num(u.kcal)} kcal</span>`);
+        if (u.protein != null) out.push(`<span class="p">${num(u.protein)} g protein</span>`);
+        return out.length ? `<div class="meta">${out.join("")}</div>` : "";
+      };
+
+      const photo = (u, cls = "") => u.gorsel
+        ? `<div class="ph has-img ${cls}"><img src="${esc(u.gorsel)}" alt="${esc(u.ad)}" loading="lazy" /></div>`
+        : `<div class="ph ${cls}" aria-hidden="true"></div>`;
+
+      const searchText = (u) => fold(`${u.ad} ${u.icerik || ""}`);
+
+      const card = (u) => `
+        <article class="card item" data-q="${esc(searchText(u))}">
+          ${photo(u)}
+          <div class="card-body">
+            <div class="card-top">
+              <h3 class="name">${esc(u.ad)}${newBadge(u)}</h3>
+              ${price(u)}
+            </div>
+            ${u.icerik ? `<p class="desc">${esc(u.icerik)}</p>` : ""}
+            ${meta(u)}
+          </div>
+        </article>`;
+
+      const row = (u) => `
+        <div class="row item" data-q="${esc(searchText(u))}">
+          ${photo(u)}
+          <div>
+            <h3 class="name">${esc(u.ad)}${newBadge(u)}</h3>
+            ${u.icerik ? `<p class="desc">${esc(u.icerik)}</p>` : ""}
+            ${meta(u)}
+          </div>
+          ${price(u)}
+        </div>`;
+
+      const kbo = (sec) => {
+        const plates = sec.urunler.filter((u) => !u.ekstra);
+        const extras = sec.urunler.filter((u) => u.ekstra);
+        const visual = sec.urunler.find((u) => u.gorsel) || {};
+        return `
+          <div class="kbo">
+            ${photo(visual, "kbo-visual")}
+            <div>
+              <ol class="steps">
+                <li><b>1</b>Yeşillik</li>
+                <li><b>2</b>Tahıl</li>
+                <li><b>3</b>4 garnitür</li>
+                <li><b>4</b>1 sos</li>
+                <li><b>5</b>Protein seç</li>
+              </ol>
+              <div class="rows">
+                ${plates.map((u) => `
+                  <div class="row item" data-q="${esc(searchText(u))}">
+                    <div>
+                      <h3 class="name">${esc(u.ad)}${u.ek ? `<span class="add">+${num(u.ek)} ₺</span>` : ""}</h3>
+                      ${u.icerik ? `<p class="desc">${esc(u.icerik)}</p>` : ""}
+                    </div>
+                    ${price(u)}
+                  </div>`).join("")}
+              </div>
+              <div class="extras">
+                ${extras.map((u) => `
+                  <div class="extra item" data-q="${esc(searchText(u))}">
+                    <span>${esc(u.ad)}</span>
+                    <strong>${num(u.fiyat)} ₺</strong>
+                  </div>`).join("")}
+              </div>
+            </div>
+          </div>`;
+      };
+
+      const body = (sec) => {
+        if (sec.duzen === "kbo") return kbo(sec);
+        if (sec.duzen === "satir") return `<div class="rows">${sec.urunler.map(row).join("")}</div>`;
+        return `<div class="cards">${sec.urunler.map(card).join("")}</div>`;
+      };
+
+      // Render
+      $("#menu").innerHTML = MENU.map((sec) => `
+        <section class="section c-${sec.renk}" id="${sec.id}" aria-labelledby="h-${sec.id}">
+          <header class="sec-head grid-bg">
+            <span class="ring logo-mask" aria-hidden="true"></span>
+            <span class="count">${sec.urunler.length}</span>
+            <span class="hand">${esc(sec.etiket)}</span>
+            <h2 id="h-${sec.id}">${esc(sec.baslik)}</h2>
+            ${sec.not ? `<p>${esc(sec.not)}</p>` : ""}
+          </header>
+          ${body(sec)}
+        </section>`).join("");
+
+      $("#cats-scroll").innerHTML = MENU.map((sec) => `<a href="#${sec.id}" data-id="${sec.id}">${esc(sec.baslik)}</a>`).join("");
+
+      const total = MENU.reduce((n, s) => n + s.urunler.length, 0);
+      $("#total-count").textContent = `${total} lezzet · ${MENU.length} kategori`;
+
+      // Aktif kategori takibi
+      const links = [...document.querySelectorAll(".cats a")];
+      const setActive = (id) => {
+        links.forEach((a) => {
+          const on = a.dataset.id === id;
+          a.classList.toggle("active", on);
+          if (on) {
+            const box = $("#cats-scroll");
+            box.scrollTo({ left: a.offsetLeft - box.clientWidth / 2 + a.clientWidth / 2, behavior: "smooth" });
+          }
+        });
+      };
+      let current = null;
+      const spy = () => {
+        const line = $("#cats").getBoundingClientRect().bottom + 40;
+        let id = null;
+        document.querySelectorAll(".section:not([hidden])").forEach((s) => {
+          if (s.getBoundingClientRect().top <= line) id = s.id;
+        });
+        if (id !== current) { current = id; setActive(id); }
+        $("#cats").classList.toggle("stuck", $("#cats").getBoundingClientRect().top <= 0);
+        $("#to-top").classList.toggle("show", window.scrollY > window.innerHeight);
+      };
+      window.addEventListener("scroll", spy, { passive: true });
+      spy();
+
+      // Arama
+      const q = $("#q");
+      const filter = () => {
+        const term = fold(q.value.trim());
+        $("#search").classList.toggle("has-value", !!term);
+        let any = false;
+        document.querySelectorAll(".section").forEach((sec) => {
+          let shown = 0;
+          sec.querySelectorAll(".item").forEach((it) => {
+            const ok = !term || it.dataset.q.includes(term);
+            it.hidden = !ok;
+            it.style.display = ok ? "" : "none";
+            if (ok) shown++;
+          });
+          const kboVisual = sec.querySelector(".kbo-visual");
+          if (kboVisual) kboVisual.style.display = term ? "none" : "";
+          sec.hidden = shown === 0;
+          links.find((a) => a.dataset.id === sec.id).hidden = shown === 0;
+          if (shown) any = true;
+        });
+        $("#empty").classList.toggle("show", !any);
+        spy();
+      };
+      q.addEventListener("input", filter);
+      $("#q-clear").addEventListener("click", () => { q.value = ""; filter(); q.focus(); });
+
+      $("#to-top").addEventListener("click", () => window.scrollTo({ top: 0 }));
+
+      // İçerik JS ile basıldığı için #kategori bağlantılarında konuma elle git
+      if (location.hash) {
+        const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView({ behavior: "instant" });
+      }
+    })();
   </script>
-
 </body>
 </html>
