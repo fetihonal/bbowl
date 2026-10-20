@@ -83,14 +83,14 @@ window.MENU = [
   {
     id: "wraplar", baslik: "Wrap'lar", renk: "sari", duzen: "kart",
     urunler: [
-      { ad: "Falafel Humus Wrap", icerik: "Lavaş, falafel, humus, közlenmiş kapya, salatalık, lahana turşusu, jalapeno, marul, roast sarımsaklı yoğurt", porsiyon: "1 adet", kcal: 651, protein: 26, fiyat: 210, gorsel: "" },
-      { ad: "Ton Balıklı-Salatalıklı Wrap", icerik: "Lavaş, ton balığı (160 g), mayonez, salatalık, dereotu, karamelize soğan, sezar sos", porsiyon: "1 adet", kcal: 821, protein: 51, fiyat: 420, gorsel: "" },
-      { ad: "Tavuklu Avokadolu Wrap", icerik: "Lavaş, tiftik tavuk, dana füme, avokado, kaşar, çıtır patates, kapya, çarliston, acı soslu yoğurt", porsiyon: "1 adet", kcal: 731, protein: 40, fiyat: 265, gorsel: "" },
-      { ad: "Sebzeli Wrap", icerik: "Lavaş, avokado ezme, domates, marul, kaşar, haşlanmış yumurta", porsiyon: "1 adet", kcal: 501, protein: 24, fiyat: 190, gorsel: "" },
-      { ad: "Füme Kaşarlı Wrap", icerik: "Lavaş, dana füme, kaşar, domates, marul, ballı hardal", porsiyon: "1 adet", kcal: 501, protein: 22, fiyat: 220, gorsel: "" },
-      { ad: "Mantar Wrap", icerik: "Lavaş, kavrulmuş mantar, havuç, avokado, lahana turşusu, pul biber, marul, sezar sos", porsiyon: "1 adet", kcal: 392, protein: 9, fiyat: 200, gorsel: "" },
-      { ad: "Soslu Köfte Wrap", icerik: "Lavaş, köfte (125 g), domates, kornişon, kaşar, avokado ezme, ballı hardal", porsiyon: "1 adet", kcal: 769, protein: 33, fiyat: 380, gorsel: "" },
-      { ad: "Tavuklu-Kaşarlı Parmesan Wrap", icerik: "Lavaş, füme tavuk, tiftik tavuk, parmesan-kaşar, fesleğen, karamelize soğan, pul biber", porsiyon: "1 adet", kcal: 651, protein: 42, fiyat: 245, gorsel: "" },
+      { ad: "Falafel Humus Wrap", icerik: "Lavaş, falafel, humus, közlenmiş kapya, salatalık, lahana turşusu, jalapeno, marul, roast sarımsaklı yoğurt", porsiyon: "1 adet", kcal: 651, protein: 26, fiyat: 210, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Ton Balıklı-Salatalıklı Wrap", icerik: "Lavaş, ton balığı (160 g), mayonez, salatalık, dereotu, karamelize soğan, sezar sos", porsiyon: "1 adet", kcal: 821, protein: 51, fiyat: 420, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Tavuklu Avokadolu Wrap", icerik: "Lavaş, tiftik tavuk, dana füme, avokado, kaşar, çıtır patates, kapya, çarliston, acı soslu yoğurt", porsiyon: "1 adet", kcal: 731, protein: 40, fiyat: 265, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Sebzeli Wrap", icerik: "Lavaş, avokado ezme, domates, marul, kaşar, haşlanmış yumurta", porsiyon: "1 adet", kcal: 501, protein: 24, fiyat: 190, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Füme Kaşarlı Wrap", icerik: "Lavaş, dana füme, kaşar, domates, marul, ballı hardal", porsiyon: "1 adet", kcal: 501, protein: 22, fiyat: 220, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Mantar Wrap", icerik: "Lavaş, kavrulmuş mantar, havuç, avokado, lahana turşusu, pul biber, marul, sezar sos", porsiyon: "1 adet", kcal: 392, protein: 9, fiyat: 200, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Soslu Köfte Wrap", icerik: "Lavaş, köfte (125 g), domates, kornişon, kaşar, avokado ezme, ballı hardal", porsiyon: "1 adet", kcal: 769, protein: 33, fiyat: 380, gorsel: "assets/wrap/wrap-kart.jpg" },
+      { ad: "Tavuklu-Kaşarlı Parmesan Wrap", icerik: "Lavaş, füme tavuk, tiftik tavuk, parmesan-kaşar, fesleğen, karamelize soğan, pul biber", porsiyon: "1 adet", kcal: 651, protein: 42, fiyat: 245, gorsel: "assets/wrap/wrap-kart.jpg" },
     ],
   },
   {
