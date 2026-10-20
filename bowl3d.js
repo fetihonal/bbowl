@@ -1,5 +1,5 @@
 /*
-  Kendi bowlunu oluştur — 3D bowl (Three.js r128). Kova (yeşilliksiz) aynı kasede gösterilir.
+  Kendi bowlunu oluştur: 3D bowl (Three.js r128). Kova (yeşilliksiz) aynı kasede gösterilir.
   bowl.js ile aynı arayüzü sunar: BowlArt3D.mount(host) → { sync(state), refill() }.
   Malzemeler bowl.js'deki gibi tanımlanır; burada her şeklin 3D karşılığı üretilir.
 */

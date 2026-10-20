@@ -1,5 +1,5 @@
 /*
-  Kendi bowlunu oluştur — animasyonlu bowl çizimi.
+  Kendi bowlunu oluştur: animasyonlu bowl çizimi.
   Seçilen her malzeme kendi şekli ve rengiyle bowl'un içine düşer.
   Yeni bir malzeme eklenirse aşağıdaki MALZEME tablosuna bir satır eklemek yeterli;
   tabloda olmayan malzemeler varsayılan şekille çizilir.
@@ -98,7 +98,7 @@
   };
 
 
-  // Malzeme adından tekrarlanabilir rastgelelik — her açılışta aynı yerleşim
+  // Malzeme adından tekrarlanabilir rastgelelik: her açılışta aynı yerleşim
   const rng = (seed) => {
     let h = 2166136261;
     for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
@@ -134,14 +134,16 @@
   };
 
   // ── Bileşen ───────────────────────────────────────────────────
+  let uid = 0;
   function mount(host) {
+    const id = ++uid; // aynı sayfada birden çok çizim olabilir
     host.innerHTML = `
       <svg class="bowl-svg" viewBox="20 40 360 270" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Senin bowlun">
         <defs>
-          <clipPath id="bowl-clip"><path d="M48 150A152 38 0 0 0 352 150C344 72 56 72 48 150z"/></clipPath>
+          <clipPath id="bowl-clip-${id}"><path d="M48 150A152 38 0 0 0 352 150C344 72 56 72 48 150z"/></clipPath>
         </defs>
         <ellipse cx="200" cy="292" rx="132" ry="11" fill="rgba(85,6,31,.14)" class="bowl-shadow"/>
-        <mask id="bowl-logo" style="mask-type:alpha"><image href="assets/logo-wordmark.png" x="146" y="214" width="108" height="33"/></mask>
+        <mask id="bowl-logo-${id}" style="mask-type:alpha"><image href="assets/logo-wordmark.png" x="146" y="214" width="108" height="33"/></mask>
         <g class="bowl-body">
           <!-- Arka: bowl ve kova gövdeleri -->
           <g class="vessel v-bowl">
@@ -151,7 +153,7 @@
           </g>
           <!-- Malzemeler -->
           <g class="contents">
-            <g clip-path="url(#bowl-clip)">
+            <g clip-path="url(#bowl-clip-${id})">
               <g data-layer="yesil"></g><g data-layer="tahil"></g><g data-layer="garnitur"></g><g data-layer="protein"></g><g data-layer="sos"></g>
             </g>
           </g>
@@ -159,7 +161,7 @@
           <g class="vessel v-bowl">
             <path d="M40 150A160 44 0 0 0 360 150" fill="none" stroke="#6d1534" stroke-width="9" stroke-linecap="round"/>
             <path d="M40 150A160 44 0 0 1 360 150" fill="none" stroke="#6d1534" stroke-width="5" stroke-linecap="round" opacity=".7"/>
-            <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo)"/>
+            <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo-${id})"/>
           </g>
         </g>
       </svg>
@@ -227,7 +229,7 @@
         want.set(`protein:${st.protein}:${st.tur || ""}`, ["protein", () => pieces(st.protein, ZONE.protein, tint),
           st.tur ? `${st.tur} tavuk` : st.protein]);
       }
-      // Garnitürler — her biri sabit bir yuvaya oturur
+      // Garnitürler: her biri sabit bir yuvaya oturur
       for (const [g] of slots) if (!st.garnitur.includes(g)) slots.delete(g);
       st.garnitur.forEach((g) => {
         if (!slots.has(g)) {

@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#55061f" />
-  <title>b'bowl — Menü</title>
-  <meta name="description" content="b'bowl dijital menü — bowl'lar, wrap'lar, sandviçler, mezeler, granolalar, smoothie'ler ve taze sıkma sular." />
+  <title>b'bowl Menü</title>
+  <meta name="description" content="b'bowl dijital menü: bowl'lar, wrap'lar, sandviçler, mezeler, granolalar, smoothie'ler ve taze sıkma sular." />
   <link rel="icon" type="image/png" href="assets/logo-mark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -221,7 +221,7 @@
     .c-neon .sec-head { background-color: var(--neon); color: var(--bordo); }
     .c-neon .sec-head .ring { color: #dcec00; }
 
-    /* Görsel alanı — boşsa marka desenli yer tutucu */
+    /* Görsel alanı: boşsa marka desenli yer tutucu */
     .ph {
       position: relative;
       overflow: hidden;
@@ -314,7 +314,7 @@
     .row .meta { margin-top: 8px; }
     .row .price { font-size: 17px; padding-top: 1px; }
 
-    /* Kendi bowlunu oluştur — oluşturucu */
+    /* Kendi bowlunu oluştur: oluşturucu */
     .kbo { display: grid; gap: 14px; }
     @media (min-width: 900px) { .kbo { grid-template-columns: 1.35fr 1fr; align-items: start; } }
     .kbo-steps { display: grid; gap: 12px; }
@@ -505,6 +505,8 @@
     }
     @media (min-width: 760px) { .kbo-teaser { grid-template-columns: 1fr 1.1fr; } }
     .kbo-teaser .ph { aspect-ratio: 16 / 10; height: 100%; }
+    .kbo-anim::after { display: none; }
+    .kbo-anim .bowl-svg { position: absolute; inset: 8% 6% 4%; width: 88%; height: 88%; }
     .kbo-teaser-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
     .kbo-teaser-body p { font-size: 14px; line-height: 1.5; color: var(--muted); }
     .kbo-teaser-body .from { font-size: 14px; font-weight: 700; }
@@ -711,7 +713,7 @@
 
   <div class="wrap empty" id="empty">
     <div class="hand">Hmm, bulamadık.</div>
-    <p>Başka bir kelime dene — ör. “falafel”, “granola”, “shot”.</p>
+    <p>Başka bir kelime dene, ör. “falafel”, “granola”, “shot”.</p>
   </div>
 
   <footer>
@@ -721,7 +723,7 @@
         <div>
           <h3>Own your taste.</h3>
           <ul>
-            <li>Kalori ve protein değerleri porsiyon başınadır; reçete gramajlarından hesaplanmış tahmini değerlerdir (±%10–15).</li>
+            <li>Kalori ve protein değerleri porsiyon başınadır; reçete gramajlarından hesaplanmış tahmini değerlerdir (±%10-15).</li>
             <li>Kendi bowlunu oluştur tabaklarının kalorisi seçilen tahıl, garnitür ve sosa göre değişir.</li>
             <li>Alerjen bilgisi için lütfen ekibimize danışın.</li>
           </ul>
@@ -831,12 +833,11 @@
       // Menüdeki bölüm: kısa tanıtım + modalı açan buton
       const kbo = (sec) => {
         const o = sec.secenekler;
-        const visual = sec.urunler.find((u) => u.gorsel) || {};
         const keywords = [sec.baslik, ...sec.urunler.map(searchText), ...o.tahillar, ...o.garnitur.liste, ...o.sos.liste,
           ...o.proteinler.flatMap((p) => [p.ad, ...(p.turler || [])])].join(" ");
         return `
           <div class="kbo-teaser item" data-q="${esc(fold(keywords))}">
-            ${photo(visual)}
+            <div class="ph kbo-anim" aria-hidden="true"></div>
             <div class="kbo-teaser-body">
               <ol class="steps-mini">
                 <li>Bowl / Kova</li><li><b>1</b>Tahıl</li><li><b>2</b>Protein</li><li><b>3</b>${o.garnitur.dahil} garnitür</li><li><b>4</b>${o.sos.dahil} sos</li>
@@ -921,7 +922,7 @@
           } else lines.push({ l: "Tahıl seçilmedi", muted: true });
           if (p) {
             const name = p.turler && state.tur ? `${state.tur} tavuk` : p.ad;
-            lines.push({ l: `Protein: <b>${esc(name)}</b>`, v: p.ek ? `+${num(p.ek)} ₺` : "—" });
+            lines.push({ l: `Protein: <b>${esc(name)}</b>`, v: p.ek ? `+${num(p.ek)} ₺` : "Dahil" });
             total += p.ek;
           } else lines.push({ l: "Protein seçilmedi", muted: true });
           const gx = Math.max(0, state.garnitur.length - o.garnitur.dahil);
@@ -1084,6 +1085,46 @@
         </section>`).join("");
 
       MENU.filter((sec) => sec.duzen === "kbo").forEach(initBuilder);
+
+      // Menüdeki tanıtım kartı: örnek bowl'lar kendi kendine dolup boşalır
+      document.querySelectorAll(".kbo-anim").forEach((host) => {
+        const art = window.BowlArt.mount(host);
+        art.refill(); // yeşillik tabanı
+        const ORNEK = [
+          { kap: "Bowl", tahil: ["Basmati"], protein: "Tavuk", tur: "Sweet chili", garnitur: ["Mısır", "Kırmızı lahana", "Salatalık", "Domates"], sos: ["Sweet chili"] },
+          { kap: "Kova", tahil: ["Erişte"], protein: "Falafel", tur: null, garnitur: ["Humus", "Pancar", "Kinoa", "Kuru domates"], sos: ["Limon-tahin"] },
+          { kap: "Bowl", tahil: ["Karabuğday"], protein: "Domates soslu köfte", tur: null, garnitur: ["Kısır", "Kuru cacık", "Kornişon turşu", "Jalapeno"], sos: ["Acı yoğurt"] },
+        ];
+        // Bir tarifi adım adım kuran ara durumlar: kap, tahıl, protein, garnitürler, sos
+        const adimlar = (r) => {
+          const st = { kap: r.kap, tahil: [], protein: null, tur: null, garnitur: [], sos: [] };
+          const out = [{ ...st }];
+          const push = (ch) => { Object.assign(st, ch); out.push({ ...st }); };
+          push({ tahil: r.tahil });
+          push({ protein: r.protein, tur: r.tur });
+          r.garnitur.forEach((g, i) => push({ garnitur: r.garnitur.slice(0, i + 1) }));
+          push({ sos: r.sos });
+          return out;
+        };
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) { art.sync(adimlar(ORNEK[0]).pop()); return; }
+        let tarif = 0, adim = 0, seq = adimlar(ORNEK[0]), timer = null, gorunur = false;
+        const tick = () => {
+          if (adim < seq.length) { art.sync(seq[adim++]); timer = setTimeout(tick, adim === 1 ? 500 : 750); return; }
+          // Bitti: biraz bekle, boşalt, sıradaki tarife geç
+          timer = setTimeout(() => {
+            const bos = seq[0];
+            tarif = (tarif + 1) % ORNEK.length;
+            seq = adimlar(ORNEK[tarif]);
+            art.sync({ ...bos, kap: bos.kap });
+            adim = 0;
+            timer = setTimeout(tick, 700);
+          }, 2600);
+        };
+        const calis = () => { if (!timer && gorunur && !document.hidden) tick(); };
+        const dur = () => { clearTimeout(timer); timer = null; };
+        new IntersectionObserver(([e]) => { gorunur = e.isIntersecting; gorunur ? calis() : dur(); }).observe(host);
+        document.addEventListener("visibilitychange", () => (document.hidden ? dur() : calis()));
+      });
 
       $("#cats-scroll").innerHTML = MENU.map((sec) => `<a href="#${sec.id}" data-id="${sec.id}">${esc(sec.baslik)}</a>`).join("");
 

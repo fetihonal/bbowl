@@ -1,5 +1,5 @@
 /*
-  B'BOWL dijital menü verisi — 15 Ekim 2026 listesi.
+  B'BOWL dijital menü verisi, 15 Ekim 2026 listesi.
 
   Görsel eklemek için ilgili ürünün `gorsel` alanına dosya yolunu yazın,
   ör. gorsel: "images/sporcu-bowl.jpg". Boş bırakılan ürünlerde görsel alanı
@@ -42,8 +42,8 @@ window.MENU = [
   },
   {
     id: "kendi-bowlun", baslik: "Kendi Bowlunu Oluştur", renk: "neon", duzen: "kbo",
-    not: "Yeşillikli bowl ya da yeşilliksiz kova — adım adım seç, fiyatın anında hesaplansın.",
-    // Oluşturucu seçenekleri — garnitür ve sos listeleri menüdeki bowl'lardan derlendi, gerekirse güncelleyin.
+    not: "Yeşillikli bowl ya da yeşilliksiz kova seç, adım adım ilerle, fiyatın anında hesaplansın.",
+    // Oluşturucu seçenekleri: garnitür ve sos listeleri menüdeki bowl'lardan derlendi, gerekirse güncelleyin.
     secenekler: {
       taban: 150,
       // Kap seçimi: bowl yeşillik tabanlı, kova yeşilliksiz. Kova için farklı fiyat varsa `ek` alanına yazın.
@@ -70,7 +70,7 @@ window.MENU = [
       },
     },
     urunler: [
-      { ad: "Taban tabak", icerik: "Yeşillik, tahıl (basmati / erişte / karabuğday), 4 garnitür, 1 sos — proteinsiz", porsiyon: "1 tabak", fiyat: 150, gorsel: "" },
+      { ad: "Taban tabak", icerik: "Yeşillik, tahıl (basmati / erişte / karabuğday), 4 garnitür, 1 sos, proteinsiz", porsiyon: "1 tabak", fiyat: 150, gorsel: "" },
       { ad: "Falafelli tabak", icerik: "Taban + falafel", ek: 70, porsiyon: "1 tabak", fiyat: 220, gorsel: "" },
       { ad: "Tavuklu tabak", icerik: "Taban + körili, kremalı mantarlı, sweet chili, biberli salçalı veya tiftik tavuk", ek: 150, porsiyon: "1 tabak", fiyat: 300, gorsel: "" },
       { ad: "Köfteli tabak", icerik: "Taban + domates soslu köfte", ek: 250, porsiyon: "1 tabak", fiyat: 400, gorsel: "" },
