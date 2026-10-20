@@ -140,7 +140,6 @@
       R: 1.92, base: 1.2, dome: .32,
       outer: V([[0, 0], [.95, 0], [1.02, .08], [1.55, .32], [1.98, .78], [2.2, 1.38], [2.24, 1.5]]),
       inner: V([[2.12, 1.5], [2.07, 1.32], [1.84, .82], [1.42, .44], [.9, .27], [0, .24]]),
-      logoBand: V([[1.86, .64], [1.98, .78], [2.08, 1.02], [2.17, 1.26]]),
     },
   };
 
@@ -161,9 +160,6 @@
     };
     img.src = "assets/logo-wordmark.png";
     logoTex.anisotropy = 4;
-    // Torna (lathe) UV'leri yazıyı aynalıyor; doku yatayda çevrilir
-    logoTex.center.set(.5, .5);
-    logoTex.repeat.set(-1, 1);
     return logoTex;
   };
 
@@ -181,11 +177,16 @@
     const rim = new T.Mesh(new T.TorusGeometry(rimR, .07, 10, 80).rotateX(Math.PI / 2), mat("#6d1534", { roughness: .35 }));
     rim.position.y = v.inner[0].y;
     g.add(rim);
-    // Logo bandı (ön yüz)
-    const logo = new T.Mesh(
-      new T.LatheGeometry(v.logoBand.map((p) => new T.Vector2(p.x * 1.012, p.y)), 24, -.62, 1.24),
-      new T.MeshBasicMaterial({ map: logoTexture(), transparent: true, depthWrite: false })
-    );
+    // Logo: kasenin ön yüzüne bükülmüş etiket
+    const lg = new T.PlaneGeometry(1.75, .54, 24, 1);
+    const lr = 2.06, lp = lg.attributes.position;
+    for (let k = 0; k < lp.count; k++) {
+      const a = lp.getX(k) / lr;
+      lp.setXYZ(k, Math.sin(a) * lr, lp.getY(k), Math.cos(a) * lr - lr);
+    }
+    lg.rotateX(.46); // kase duvarının eğimi
+    lg.translate(0, .95, lr + .02);
+    const logo = new T.Mesh(lg, new T.MeshBasicMaterial({ map: logoTexture(), transparent: true, depthWrite: false }));
     g.add(logo);
     g.userData.v = v;
     return g;
@@ -291,7 +292,7 @@
 
     // Taban tümseği: iç karanlık kalmasın diye yeşillik/tahıl renginde dolgu
     const V0 = VESSEL.bowl;
-    const baseMat = new T.MeshStandardMaterial({ color: new T.Color("#4f8f34"), roughness: .85 });
+    const baseMat = new T.MeshStandardMaterial({ color: new T.Color("#3c6e2a"), roughness: .85 });
     const mound = new T.Mesh(new T.SphereGeometry(1, 40, 14, 0, Math.PI * 2, 0, Math.PI / 2), baseMat);
     mound.scale.set(V0.R * 1.04, .001, V0.R * 1.04);
     mound.position.y = V0.base - .04;
@@ -387,7 +388,7 @@
       if (!kova && !live.has("yesil")) add("yesil", leaves());
       if (kova && live.has("yesil")) remove("yesil");
       // Bowl'da yeşil taban; kovada seçili tahılın rengi (tahıl yoksa boş)
-      const moundHex = kova ? (st.tahil[0] ? (MALZEME[st.tahil[0]] || VARSAYILAN).c : null) : "#4f8f34";
+      const moundHex = kova ? (st.tahil[0] ? (MALZEME[st.tahil[0]] || VARSAYILAN).c : null) : "#3c6e2a";
       if (mound.userData.k !== (moundHex || "none")) { mound.userData.k = moundHex || "none"; moundTo(moundHex || "#3d0416", !!moundHex); }
 
       const want = new Map();
