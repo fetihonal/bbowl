@@ -149,13 +149,6 @@
             <path d="M70 196C96 250 150 272 200 272" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="10" stroke-linecap="round"/>
             <ellipse cx="200" cy="150" rx="160" ry="44" fill="#3d0416"/>
           </g>
-          <g class="vessel v-kova">
-            <path d="M84 154C76 40 324 40 316 154" fill="none" stroke="#6d1534" stroke-width="6" stroke-linecap="round"/>
-            <path d="M78 150L104 280Q200 298 296 280L322 150z" fill="#55061f"/>
-            <path d="M83 176Q200 204 317 176" fill="none" stroke="#c4dff4" stroke-width="6" opacity=".9"/>
-            <path d="M100 196L118 272" stroke="#fff" stroke-opacity=".08" stroke-width="9" stroke-linecap="round"/>
-            <ellipse cx="200" cy="150" rx="122" ry="30" fill="#3d0416"/>
-          </g>
           <!-- Malzemeler -->
           <g class="contents">
             <g clip-path="url(#bowl-clip)">
@@ -167,12 +160,6 @@
             <path d="M40 150A160 44 0 0 0 360 150" fill="none" stroke="#6d1534" stroke-width="9" stroke-linecap="round"/>
             <path d="M40 150A160 44 0 0 1 360 150" fill="none" stroke="#6d1534" stroke-width="5" stroke-linecap="round" opacity=".7"/>
             <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo)"/>
-          </g>
-          <g class="vessel v-kova">
-            <path d="M78 150A122 30 0 0 0 322 150" fill="none" stroke="#6d1534" stroke-width="7" stroke-linecap="round"/>
-            <path d="M78 150A122 30 0 0 1 322 150" fill="none" stroke="#6d1534" stroke-width="4" stroke-linecap="round" opacity=".7"/>
-            <circle cx="84" cy="156" r="4" fill="#c4dff4"/><circle cx="316" cy="156" r="4" fill="#c4dff4"/>
-            <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo)" transform="translate(200 230) scale(.85) translate(-200 -230)"/>
           </g>
         </g>
       </svg>
@@ -218,13 +205,12 @@
     let yesillik = true;
 
     const sync = (st) => {
-      // Kap: bowl yeşillikli, kova yeşilliksiz
       const kova = st.kap === "Kova";
-      if (svg.classList.contains("is-kova") !== kova) {
-        svg.classList.toggle("is-kova", kova);
+      // Kova = aynı kase, yeşilliksiz
+      if (yesillik === kova) {
         yesillik = !kova;
         if (kova) remove("yesil"); else add("yesil", "yesil", leaves());
-        pop(kova ? "Kova" : "Bowl");
+        pop(kova ? "Yeşilliksiz" : "Yeşillik");
         setTimeout(wiggle, 300);
       }
       const want = new Map();

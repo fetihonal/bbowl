@@ -1,0 +1,14 @@
+<meta charset="utf-8"><body style="margin:0;display:flex;gap:20px;background:#333">
+<iframe src="index.html" style="width:390px;height:844px;border:0" data-k="Kova"></iframe>
+<iframe src="index.html" style="width:1200px;height:844px;border:0" data-k="Bowl"></iframe>
+<script>
+for (const f of document.querySelectorAll('iframe')) f.onload=()=>setTimeout(()=>{const d=f.contentDocument;
+ const click=(g,v)=>d.querySelector(`.opt[data-group="${g}"][data-val="${v}"]`).click();
+ d.querySelector('.fab').click();
+ setTimeout(()=>{
+ if (f.dataset.k==='Kova') click('kap','Kova');
+ click('tahil','Basmati');click('protein','Tavuk');click('tur','Körili');
+ ['Kinoa','Mısır','Domates','Salatalık','Cevizli brokoli','Bıldırcın yumurtası'].forEach(x=>click('garnitur',x));click('sos','Pesto');
+ },2500);
+},300);
+</script></body>

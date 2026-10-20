@@ -422,12 +422,6 @@
     @keyframes shrink { to { opacity: 0; transform: scale(.5); } }
     .bowl-svg .sauce { stroke-dasharray: 1; stroke-dashoffset: 1; animation: pour .75s ease forwards .1s; }
     @keyframes pour { to { stroke-dashoffset: 0; } }
-    /* Bowl ↔ kova geçişi */
-    .bowl-svg .vessel { transform-origin: 200px 290px; transition: opacity .3s ease, transform .45s cubic-bezier(.3, 1.4, .5, 1); }
-    .bowl-svg .v-kova, .bowl-svg.is-kova .v-bowl { opacity: 0; transform: scale(.82, .55); }
-    .bowl-svg.is-kova .v-kova { opacity: 1; transform: none; }
-    .bowl-svg .contents { transform-origin: 200px 150px; transition: transform .45s cubic-bezier(.3, 1.3, .5, 1); }
-    .bowl-svg.is-kova .contents { transform: scale(.8, .79); }
     .bowl-svg .bowl-body.wiggle { transform-box: fill-box; transform-origin: 50% 100%; animation: wig .5s ease; }
     @keyframes wig {
       25% { transform: rotate(-2.2deg) translateY(2px); }
@@ -435,6 +429,15 @@
       80% { transform: rotate(-.6deg); }
     }
     .bowl-pops { position: absolute; inset: 0; pointer-events: none; }
+    .bowl3d { position: absolute; inset: 0; animation: fade .4s ease both; }
+    .bowl3d canvas { display: block; width: 100% !important; height: 100% !important; cursor: grab; }
+    .bowl-stage.grabbing canvas { cursor: grabbing; }
+    .bowl-hint {
+      position: absolute; right: 10px; bottom: 8px;
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      background: rgba(255, 250, 244, .85); border: 1px solid var(--line);
+      padding: 3px 9px; border-radius: 999px; pointer-events: none;
+    }
     .bowl-pops span {
       position: absolute; top: 10%;
       font-size: 13px; font-weight: 800; white-space: nowrap;
@@ -455,12 +458,12 @@
       .bowl-stage {
         order: -1;
         position: sticky; top: -16px; z-index: 3;
-        aspect-ratio: auto; height: 190px;
+        aspect-ratio: auto; height: 210px;
         margin: -16px -16px 0;
         border-radius: 0; border: 0; border-bottom: 1px solid var(--line);
       }
-      .step { scroll-margin-top: 190px; }
-      #receipt { scroll-margin-top: 190px; }
+      .step { scroll-margin-top: 210px; }
+      #receipt { scroll-margin-top: 210px; }
     }
     .receipt {
       background: var(--bordo);
@@ -891,7 +894,17 @@
         const o = sec.secenekler;
         $("#kbo-body").innerHTML = builder(sec);
         const root = $("#kbo-modal");
-        const art = window.BowlArt.mount($("#bowl-stage"));
+        // Önce 2D çizim; modal ilk açılınca 3D sahne (Three.js) yüklenip yerine geçer
+        let art = window.BowlArt.mount($("#bowl-stage"));
+        let is3D = false;
+        const loadScript = (src) => new Promise((res, rej) => {
+          const el = document.createElement("script");
+          el.src = src; el.onload = res; el.onerror = rej;
+          document.head.appendChild(el);
+        });
+        let three = null;
+        const load3D = () => three || (three = loadScript("https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js")
+          .then(() => loadScript("bowl3d.js")));
         const EMPTY = () => ({ kap: o.kaplar[0].ad, tahil: [], protein: null, tur: null, garnitur: [], sos: [] });
         const state = EMPTY();
         const kap = () => o.kaplar.find((k) => k.ad === state.kap) || o.kaplar[0];
@@ -1022,7 +1035,16 @@
           root.classList.add("open");
           document.documentElement.classList.add("lock");
           document.body.classList.add("modal-open");
-          setTimeout(art.refill, 180);
+          if (is3D) setTimeout(art.refill, 180);
+          else {
+            setTimeout(art.refill, 180);
+            load3D().then(() => {
+              if (is3D || !window.BowlArt3D || !window.BowlArt3D.supported()) return;
+              art = window.BowlArt3D.mount($("#bowl-stage"));
+              is3D = true;
+              art.sync(state);
+            }).catch(() => {}); // CDN yoksa 2D çizim kalır
+          }
           $("#kbo-close").focus({ preventScroll: true });
         };
         const close = () => {
