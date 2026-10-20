@@ -10,7 +10,7 @@
 */
 window.MENU = [
   {
-    id: "bowllar", baslik: "Bowl'lar", etiket: "b'green bowl", renk: "bordo", duzen: "kart",
+    id: "bowllar", baslik: "Bowl'lar", renk: "bordo", duzen: "kart",
     urunler: [
       { ad: "Sporcu Bowl", icerik: "Yeşillik tabanı, basmati, tiftik tavuk (240 g), kinoa, bıldırcın yumurtası, cevizli brokoli, maş fasulyesi, roast sarımsaklı yoğurt sos", porsiyon: "620 g", kcal: 945, protein: 87, fiyat: 420, gorsel: "" },
       { ad: "Vegan Bowl", icerik: "Yeşillik tabanı, basmati, falafel, humus, kırmızı lahana, maş fasulyesi, domates, limon-tahin sos", porsiyon: "530 g", kcal: 761, protein: 27, fiyat: 225, gorsel: "" },
@@ -25,7 +25,7 @@ window.MENU = [
     ],
   },
   {
-    id: "kova-pilavlar", baslik: "Kova Pilavlar", etiket: "b'ready", not: "Yeşilliksiz, sossuz", renk: "yesil", duzen: "kart",
+    id: "kova-pilavlar", baslik: "Kova Pilavlar", not: "Yeşilliksiz, sossuz", renk: "yesil", duzen: "kart",
     urunler: [
       { ad: "Körili Tavuklu Kova Pilav", icerik: "Basmati (300 g), körili tavuk (120 g), kuru cacık, kırmızı lahana, mısır, salatalık", porsiyon: "570 g", kcal: 804, protein: 35, fiyat: 235, gorsel: "" },
       { ad: "Kremalı Mantarlı Tavuklu Kova Pilav", icerik: "Basmati (300 g), kremalı mantarlı tavuk (120 g), cevizli brokoli, kuru domates, mısır, kornişon turşu", porsiyon: "545 g", kcal: 811, protein: 34, fiyat: 250, gorsel: "" },
@@ -34,14 +34,14 @@ window.MENU = [
     ],
   },
   {
-    id: "salatalar", baslik: "Salatalar", etiket: "b'fresh salad", renk: "mavi", duzen: "kart",
+    id: "salatalar", baslik: "Salatalar", renk: "mavi", duzen: "kart",
     urunler: [
       { ad: "Tavuklu Sezar Salata", icerik: "Tiftik tavuk (270 g), çeri domates, marul, kruton, sezar sos", porsiyon: "420 g", kcal: 686, protein: 89, fiyat: 200, gorsel: "" },
       { ad: "Ton Balıklı Salata", icerik: "Ton balığı, yeşillik, çeri domates, salatalık, mısır, kırmızı soğan, zeytin, zeytinyağlı-limonlu sos", porsiyon: "~405 g", kcal: 449, protein: 36, fiyat: 240, yeni: true, gorsel: "" },
     ],
   },
   {
-    id: "kendi-bowlun", baslik: "Kendi Bowlunu Oluştur", etiket: "own your taste", renk: "neon", duzen: "kbo",
+    id: "kendi-bowlun", baslik: "Kendi Bowlunu Oluştur", renk: "neon", duzen: "kbo",
     not: "Yeşillik + tahıl (basmati / erişte / karabuğday) + 4 garnitür + 1 sos. Kalori seçimlerine göre değişir.",
     urunler: [
       { ad: "Taban tabak", icerik: "Yeşillik, tahıl (basmati / erişte / karabuğday), 4 garnitür, 1 sos — proteinsiz", porsiyon: "1 tabak", fiyat: 150, gorsel: "" },
@@ -55,7 +55,7 @@ window.MENU = [
     ],
   },
   {
-    id: "wraplar", baslik: "Wrap'lar", etiket: "b'fast", renk: "sari", duzen: "kart",
+    id: "wraplar", baslik: "Wrap'lar", renk: "sari", duzen: "kart",
     urunler: [
       { ad: "Falafel Humus Wrap", icerik: "Lavaş, falafel, humus, közlenmiş kapya, salatalık, lahana turşusu, jalapeno, marul, roast sarımsaklı yoğurt", porsiyon: "1 adet", kcal: 651, protein: 26, fiyat: 210, gorsel: "" },
       { ad: "Ton Balıklı-Salatalıklı Wrap", icerik: "Lavaş, ton balığı (160 g), mayonez, salatalık, dereotu, karamelize soğan, sezar sos", porsiyon: "1 adet", kcal: 821, protein: 51, fiyat: 420, gorsel: "" },
@@ -68,7 +68,7 @@ window.MENU = [
     ],
   },
   {
-    id: "sandvicler", baslik: "Sandviçler", etiket: "b'daily", renk: "bordo", duzen: "kart",
+    id: "sandvicler", baslik: "Sandviçler", renk: "bordo", duzen: "kart",
     urunler: [
       { ad: "Labneli & Salamlı Sandviç", icerik: "Baget ekmek, labne, domates, salam (30 g), kaşar (45 g), marul", porsiyon: "1 adet", kcal: 608, protein: 27, fiyat: 190, gorsel: "" },
       { ad: "Avokado Ezmeli & Fesleğenli Sandviç", icerik: "Baget ekmek, avokado ezmesi, fesleğen, salam (30 g), kaşar (45 g), beyaz peynir (45 g)", porsiyon: "1 adet", kcal: 692, protein: 33, fiyat: 225, gorsel: "" },
@@ -79,7 +79,7 @@ window.MENU = [
     ],
   },
   {
-    id: "ucgen-sandvicler", baslik: "Üçgen Sandviçler", etiket: "b'urban", renk: "yesil", duzen: "kart",
+    id: "ucgen-sandvicler", baslik: "Üçgen Sandviçler", renk: "yesil", duzen: "kart",
     urunler: [
       { ad: "Ton Balıklı Üçgen Sandviç", icerik: "Sandviç ekmeği, ton balığı (104 g), mayonez, sezar sos, marul, salatalık", porsiyon: "1 adet", kcal: 457, protein: 36, fiyat: 295, gorsel: "" },
       { ad: "Pastırmalı Üçgen Sandviç", icerik: "Sandviç ekmeği, pastırma (100 g), kaşar, yeşillik, domates, ballı hardal sos", porsiyon: "1 adet", kcal: 544, protein: 43, fiyat: 350, gorsel: "" },
@@ -88,7 +88,7 @@ window.MENU = [
     ],
   },
   {
-    id: "mezeler", baslik: "Mezeler", etiket: "b'meze", renk: "mavi", duzen: "satir",
+    id: "mezeler", baslik: "Mezeler", renk: "mavi", duzen: "satir",
     urunler: [
       { ad: "Haydari", icerik: "Süzme yoğurt, labne, beyaz peynir, ceviz, zeytinyağı, sarımsak, dereotu, kuru nane, pul biber, tereyağı", porsiyon: "150 g", kcal: 260, protein: 14, fiyat: 155, gorsel: "" },
       { ad: "Kuru Cacık", icerik: "Süzme yoğurt, salatalık, sarımsak, zeytinyağı, kuru nane, dereotu, limon suyu", porsiyon: "150 g", kcal: 152, protein: 12, fiyat: 125, gorsel: "" },
@@ -108,7 +108,7 @@ window.MENU = [
     ],
   },
   {
-    id: "granolalar", baslik: "Granolalar", etiket: "b'sweet", renk: "sari", duzen: "kart",
+    id: "granolalar", baslik: "Granolalar", renk: "sari", duzen: "kart",
     urunler: [
       { ad: "Muzlu Çikolatalı Granola", icerik: "Süzme yoğurt, labne, muz, karabuğday granola, kakao, bal, bitter çikolata, fındık", porsiyon: "260 g", kcal: 519, protein: 18, fiyat: 185, gorsel: "" },
       { ad: "Elmalı Granola", icerik: "Süzme yoğurt, elma, granola", porsiyon: "260 g", kcal: 384, protein: 20, fiyat: 150, gorsel: "" },
@@ -122,7 +122,7 @@ window.MENU = [
     ],
   },
   {
-    id: "smoothieler", baslik: "Smoothie'ler", etiket: "b'smooth", renk: "bordo", duzen: "kart",
+    id: "smoothieler", baslik: "Smoothie'ler", renk: "bordo", duzen: "kart",
     urunler: [
       { ad: "Yeşil Smoothie", icerik: "Salatalık, armut, yoğurt, taze nane, limon suyu, buz", porsiyon: "340 g", kcal: 109, protein: 4, fiyat: 70, gorsel: "" },
       { ad: "Sarı Smoothie", icerik: "Hurma, avokado, fıstık ezmesi, susam, havuç, zerdeçal, limon suyu, süt, buz", porsiyon: "340 g", kcal: 383, protein: 10, fiyat: 155, gorsel: "" },
@@ -131,7 +131,7 @@ window.MENU = [
     ],
   },
   {
-    id: "sikma-sular", baslik: "Sıkma Sular & Shot'lar", etiket: "b'fresh juice · b'boost shot", renk: "yesil", duzen: "satir",
+    id: "sikma-sular", baslik: "Sıkma Sular & Shot'lar", renk: "yesil", duzen: "satir",
     urunler: [
       { ad: "Pancar-Limon-Elma-Zencefil", icerik: "Pancar, limon, elma, zencefil", porsiyon: "300 ml", kcal: 123, protein: 2, fiyat: 130, gorsel: "" },
       { ad: "Portakal Suyu", icerik: "Portakal", porsiyon: "300 ml", kcal: 135, protein: 2, fiyat: 80, gorsel: "" },
@@ -148,28 +148,28 @@ window.MENU = [
     ],
   },
   {
-    id: "detoks-sulari", baslik: "Detoks Suları", etiket: "b'light", renk: "mavi", duzen: "satir",
+    id: "detoks-sulari", baslik: "Detoks Suları", renk: "mavi", duzen: "satir",
     urunler: [
       { ad: "Elma-Limon-Nane Detoks Suyu", icerik: "Su, elma, limon, taze nane", porsiyon: "1 şişe", kcal: 10, protein: "<1", fiyat: 40, yeni: true, gorsel: "" },
       { ad: "Portakal-Zencefil-Tarçın Detoks Suyu", icerik: "Su, portakal, zencefil, tarçın", porsiyon: "1 şişe", kcal: 10, protein: "<1", fiyat: 40, yeni: true, gorsel: "" },
     ],
   },
   {
-    id: "atom-icecegi", baslik: "Atom İçeceği", etiket: "b'boost", renk: "sari", duzen: "satir",
+    id: "atom-icecegi", baslik: "Atom İçeceği", renk: "sari", duzen: "satir",
     urunler: [
       { ad: "Sütlü Atom", icerik: "Süt, muz, fındık, ceviz, bal", porsiyon: "330 ml", kcal: 250, protein: 9, fiyat: 110, gorsel: "" },
       { ad: "Badem Sütlü Atom", icerik: "Badem sütü, muz, fındık, ceviz, bal", porsiyon: "330 ml", kcal: 169, protein: 3, fiyat: 120, gorsel: "" },
     ],
   },
   {
-    id: "ayranlar", baslik: "Ayranlar", etiket: "b'cool", renk: "bordo", duzen: "satir",
+    id: "ayranlar", baslik: "Ayranlar", renk: "bordo", duzen: "satir",
     urunler: [
       { ad: "Avokadolu Ayran", icerik: "Yoğurt, soda, su, avokado, taze nane, limon suyu, tuz", porsiyon: "~390 ml", kcal: 79, protein: 3, fiyat: 90, yeni: true, gorsel: "" },
       { ad: "Pestolu-Sodalı Ayran", icerik: "Yoğurt, pesto, soda", porsiyon: "300 ml", kcal: null, protein: null, fiyat: null, gorsel: "" },
     ],
   },
   {
-    id: "tek-meyve", baslik: "Tek Meyve", etiket: "b'fruit", renk: "neon", duzen: "satir",
+    id: "tek-meyve", baslik: "Tek Meyve", renk: "neon", duzen: "satir",
     urunler: [
       { ad: "Elma", porsiyon: "1 adet", kcal: 105, protein: "<1", fiyat: 35, onerilen: true, gorsel: "" },
       { ad: "Armut", porsiyon: "1 adet", kcal: 115, protein: "<1", fiyat: 40, onerilen: true, gorsel: "" },

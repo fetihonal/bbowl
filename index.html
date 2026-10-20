@@ -82,11 +82,7 @@
       display: grid;
       gap: 22px;
     }
-    .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    @media (max-width: 479px) { .hero-top small { display: none; } }
-    .hero-top small { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--mavi); }
     .hero-logo { width: min(64vw, 300px); aspect-ratio: 860 / 264; --src: url(assets/logo-wordmark.png); color: var(--krem); }
-    .hero-tag { font-weight: 700; font-size: clamp(18px, 4.6vw, 26px); letter-spacing: -.01em; }
     .hero-title {
       font-weight: 900;
       font-size: clamp(64px, 20vw, 168px);
@@ -96,19 +92,6 @@
       color: var(--sari);
       position: relative;
       width: fit-content;
-    }
-    .hero-title .hand {
-      display: block;
-      margin-top: .3em;
-      font-family: var(--hand);
-      font-size: .24em;
-      line-height: 1;
-      letter-spacing: 0;
-      text-transform: none;
-      color: var(--neon);
-      transform: rotate(-4deg);
-      transform-origin: left center;
-      white-space: nowrap;
     }
     .hero-ring {
       position: absolute;
@@ -120,14 +103,6 @@
       color: var(--neon);
       transform: rotate(-14deg);
       pointer-events: none;
-    }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .hero-meta span {
-      font-size: 12px; font-weight: 700;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(252, 241, 231, .1);
-      border: 1px solid rgba(252, 241, 231, .18);
     }
 
     .search {
@@ -217,12 +192,6 @@
       text-transform: uppercase;
       position: relative;
     }
-    .sec-head .hand {
-      font-family: var(--hand);
-      font-size: clamp(20px, 5vw, 28px);
-      line-height: 1;
-      position: relative;
-    }
     .sec-head p { font-size: 14px; font-weight: 600; opacity: .85; position: relative; max-width: 560px; }
     .sec-head .count {
       position: absolute; top: 18px; right: 18px;
@@ -240,20 +209,15 @@
     }
 
     .c-bordo .sec-head { background-color: var(--bordo); color: var(--krem); }
-    .c-bordo .sec-head .hand { color: var(--mavi); }
     .c-bordo .sec-head .ring { color: var(--bordo-2); }
     .c-yesil .sec-head { background-color: var(--yesil); color: var(--krem); }
-    .c-yesil .sec-head .hand { color: var(--neon); }
     .c-yesil .sec-head .ring { color: #0e4d44; }
     .c-mavi .sec-head { background-color: var(--mavi); color: var(--bordo); }
-    .c-mavi .sec-head .hand { color: var(--yesil); }
     .c-mavi .sec-head .ring { color: #b0d2ec; }
     .c-mavi .sec-head .count, .c-sari .sec-head .count, .c-neon .sec-head .count { background: rgba(85, 6, 31, .1); }
     .c-sari .sec-head { background-color: var(--sari); color: var(--bordo); }
-    .c-sari .sec-head .hand { color: var(--yesil); }
     .c-sari .sec-head .ring { color: #f2b800; }
     .c-neon .sec-head { background-color: var(--neon); color: var(--bordo); }
-    .c-neon .sec-head .hand { color: var(--yesil); }
     .c-neon .sec-head .ring { color: #dcec00; }
 
     /* Görsel alanı — boşsa marka desenli yer tutucu */
@@ -439,18 +403,8 @@
   <header class="hero grid-bg">
     <span class="hero-ring logo-mask" aria-hidden="true"></span>
     <div class="wrap hero-inner">
-      <div class="hero-top">
-        <h1 class="hero-logo logo-mask" role="img" aria-label="b'bowl"></h1>
-        <small>B'Fast · B'Ready · B'Urban</small>
-      </div>
-      <div>
-        <p class="hero-tag">Market Fresh. Bowl Ready.</p>
-        <div class="hero-meta">
-          <span id="total-count">92 lezzet</span>
-          <span>Kalori &amp; protein bilgili</span>
-        </div>
-      </div>
-      <div class="hero-title" aria-hidden="true">Menü<span class="hand">taze. günlük. hazır.</span></div>
+      <h1 class="hero-logo logo-mask" role="img" aria-label="b'bowl"></h1>
+      <div class="hero-title" aria-hidden="true">Menü</div>
       <label class="search" id="search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="search" id="q" placeholder="Ürün ya da içerik ara… (ör. tavuk, avokado)" autocomplete="off" aria-label="Menüde ara" />
@@ -597,7 +551,6 @@
           <header class="sec-head grid-bg">
             <span class="ring logo-mask" aria-hidden="true"></span>
             <span class="count">${sec.urunler.length}</span>
-            <span class="hand">${esc(sec.etiket)}</span>
             <h2 id="h-${sec.id}">${esc(sec.baslik)}</h2>
             ${sec.not ? `<p>${esc(sec.not)}</p>` : ""}
           </header>
@@ -605,9 +558,6 @@
         </section>`).join("");
 
       $("#cats-scroll").innerHTML = MENU.map((sec) => `<a href="#${sec.id}" data-id="${sec.id}">${esc(sec.baslik)}</a>`).join("");
-
-      const total = MENU.reduce((n, s) => n + s.urunler.length, 0);
-      $("#total-count").textContent = `${total} lezzet · ${MENU.length} kategori`;
 
       // Aktif kategori takibi
       const links = [...document.querySelectorAll(".cats a")];
