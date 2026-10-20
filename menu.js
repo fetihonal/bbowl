@@ -42,7 +42,28 @@ window.MENU = [
   },
   {
     id: "kendi-bowlun", baslik: "Kendi Bowlunu Oluştur", renk: "neon", duzen: "kbo",
-    not: "Yeşillik + tahıl (basmati / erişte / karabuğday) + 4 garnitür + 1 sos. Kalori seçimlerine göre değişir.",
+    not: "Adım adım seç, fiyatın anında hesaplansın. Yeşillik tabanı her tabakta dahil.",
+    // Oluşturucu seçenekleri — garnitür ve sos listeleri menüdeki bowl'lardan derlendi, gerekirse güncelleyin.
+    secenekler: {
+      taban: 150,
+      tahillar: ["Basmati", "Erişte", "Karabuğday"],
+      ciftTahil: 25,
+      proteinler: [
+        { ad: "Proteinsiz", ek: 0 },
+        { ad: "Falafel", ek: 70 },
+        { ad: "Tavuk", ek: 150, turler: ["Körili", "Kremalı mantarlı", "Sweet chili", "Biberli salçalı", "Tiftik"] },
+        { ad: "Domates soslu köfte", ek: 250 },
+        { ad: "Ton balığı", ek: 270 },
+      ],
+      garnitur: {
+        dahil: 4, ekstra: 20,
+        liste: ["Kinoa", "Cevizli brokoli", "Maş fasulyesi", "Bıldırcın yumurtası", "Humus", "Kırmızı lahana", "Domates", "Salatalık", "Mısır", "Kuru domates", "Pancar", "Kısır", "Kuru cacık", "Kornişon turşu", "Jalapeno", "Kruton", "Tortilla cips"],
+      },
+      sos: {
+        dahil: 1, ekstra: 25,
+        liste: ["Roast sarımsaklı yoğurt", "Limon-tahin", "Sweet chili", "Sezar", "Pesto", "Chipotle-lime", "Acı yoğurt", "Ballı hardal"],
+      },
+    },
     urunler: [
       { ad: "Taban tabak", icerik: "Yeşillik, tahıl (basmati / erişte / karabuğday), 4 garnitür, 1 sos — proteinsiz", porsiyon: "1 tabak", fiyat: 150, gorsel: "" },
       { ad: "Falafelli tabak", icerik: "Taban + falafel", ek: 70, porsiyon: "1 tabak", fiyat: 220, gorsel: "" },
