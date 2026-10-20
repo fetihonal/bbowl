@@ -141,17 +141,39 @@
           <clipPath id="bowl-clip"><path d="M48 150A152 38 0 0 0 352 150C344 72 56 72 48 150z"/></clipPath>
         </defs>
         <ellipse cx="200" cy="292" rx="132" ry="11" fill="rgba(85,6,31,.14)" class="bowl-shadow"/>
+        <mask id="bowl-logo" style="mask-type:alpha"><image href="assets/logo-wordmark.png" x="146" y="214" width="108" height="33"/></mask>
         <g class="bowl-body">
-          <path d="M40 150C46 236 112 286 200 286S354 236 360 150z" fill="#55061f"/>
-          <path d="M70 196C96 250 150 272 200 272" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="10" stroke-linecap="round"/>
-          <ellipse cx="200" cy="150" rx="160" ry="44" fill="#3d0416"/>
-          <g clip-path="url(#bowl-clip)">
-            <g data-layer="yesil"></g><g data-layer="tahil"></g><g data-layer="garnitur"></g><g data-layer="protein"></g><g data-layer="sos"></g>
+          <!-- Arka: bowl ve kova gövdeleri -->
+          <g class="vessel v-bowl">
+            <path d="M40 150C46 236 112 286 200 286S354 236 360 150z" fill="#55061f"/>
+            <path d="M70 196C96 250 150 272 200 272" fill="none" stroke="#fff" stroke-opacity=".08" stroke-width="10" stroke-linecap="round"/>
+            <ellipse cx="200" cy="150" rx="160" ry="44" fill="#3d0416"/>
           </g>
-          <path d="M40 150A160 44 0 0 0 360 150" fill="none" stroke="#6d1534" stroke-width="9" stroke-linecap="round"/>
-          <path d="M40 150A160 44 0 0 1 360 150" fill="none" stroke="#6d1534" stroke-width="5" stroke-linecap="round" opacity=".7"/>
-          <mask id="bowl-logo" style="mask-type:alpha"><image href="assets/logo-wordmark.png" x="146" y="214" width="108" height="33"/></mask>
-          <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo)"/>
+          <g class="vessel v-kova">
+            <path d="M84 154C76 40 324 40 316 154" fill="none" stroke="#6d1534" stroke-width="6" stroke-linecap="round"/>
+            <path d="M78 150L104 280Q200 298 296 280L322 150z" fill="#55061f"/>
+            <path d="M83 176Q200 204 317 176" fill="none" stroke="#c4dff4" stroke-width="6" opacity=".9"/>
+            <path d="M100 196L118 272" stroke="#fff" stroke-opacity=".08" stroke-width="9" stroke-linecap="round"/>
+            <ellipse cx="200" cy="150" rx="122" ry="30" fill="#3d0416"/>
+          </g>
+          <!-- Malzemeler -->
+          <g class="contents">
+            <g clip-path="url(#bowl-clip)">
+              <g data-layer="yesil"></g><g data-layer="tahil"></g><g data-layer="garnitur"></g><g data-layer="protein"></g><g data-layer="sos"></g>
+            </g>
+          </g>
+          <!-- Ön: ağız kenarları ve logo -->
+          <g class="vessel v-bowl">
+            <path d="M40 150A160 44 0 0 0 360 150" fill="none" stroke="#6d1534" stroke-width="9" stroke-linecap="round"/>
+            <path d="M40 150A160 44 0 0 1 360 150" fill="none" stroke="#6d1534" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+            <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo)"/>
+          </g>
+          <g class="vessel v-kova">
+            <path d="M78 150A122 30 0 0 0 322 150" fill="none" stroke="#6d1534" stroke-width="7" stroke-linecap="round"/>
+            <path d="M78 150A122 30 0 0 1 322 150" fill="none" stroke="#6d1534" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+            <circle cx="84" cy="156" r="4" fill="#c4dff4"/><circle cx="316" cy="156" r="4" fill="#c4dff4"/>
+            <rect x="146" y="214" width="108" height="33" fill="#fcf1e7" mask="url(#bowl-logo)" transform="translate(200 230) scale(.85) translate(-200 -230)"/>
+          </g>
         </g>
       </svg>
       <div class="bowl-pops" aria-hidden="true"></div>`;
@@ -189,11 +211,30 @@
       setTimeout(() => g.remove(), 260);
     };
 
+    const leaves = () =>
+      pieces("yesil-a", ZONE.yesil, { s: "leaf", c: "#5aa33d", n: 30 }) +
+      pieces("yesil-b", ZONE.yesil, { s: "leaf", c: "#3f7f2e", n: 24 }, 0.1) +
+      pieces("yesil-c", ZONE.yesil, { s: "leaf", c: "#8cc152", n: 14 }, 0.2);
+    let yesillik = true;
+
     const sync = (st) => {
+      // Kap: bowl yeşillikli, kova yeşilliksiz
+      const kova = st.kap === "Kova";
+      if (svg.classList.contains("is-kova") !== kova) {
+        svg.classList.toggle("is-kova", kova);
+        yesillik = !kova;
+        if (kova) remove("yesil"); else add("yesil", "yesil", leaves());
+        pop(kova ? "Kova" : "Bowl");
+        setTimeout(wiggle, 300);
+      }
       const want = new Map();
       // Tahıl(lar)
-      const tz = st.tahil.length > 1 ? ZONE.tahil2 : ZONE.tahil;
-      st.tahil.forEach((t, i) => want.set(`tahil:${t}@${st.tahil.length}:${i}`, ["tahil", () => pieces(t, tz[i]), t]));
+      // Kovada yeşillik yok; tahıl (kova pilav gibi) tüm tabanı kaplar
+      const tz = kova
+        ? (st.tahil.length > 1 ? [{ ...ZONE.yesil, cx: 140, rx: 82 }, { ...ZONE.yesil, cx: 260, rx: 82 }] : [ZONE.yesil])
+        : (st.tahil.length > 1 ? ZONE.tahil2 : ZONE.tahil);
+      const dense = (t) => (kova ? { n: Math.round((MALZEME[t] || VARSAYILAN).n * 2.4 / st.tahil.length) } : {});
+      st.tahil.forEach((t, i) => want.set(`tahil:${t}@${st.tahil.length}:${i}:${kova}`, ["tahil", () => pieces(t, tz[i], dense(t)), t]));
       // Protein
       if (st.protein && st.protein !== "Proteinsiz") {
         const tint = st.tur && MALZEME[st.tur] ? { c: MALZEME[st.tur].c } : {};
@@ -219,14 +260,10 @@
       for (const [k, [ly, mk, label]] of want) if (!live.has(k)) add(k, ly, mk(), label);
     };
 
-    // Yeşillik tabanı her açılışta yeniden serpilir
+    // Açılışta yeşillik (bowl ise) yeniden serpilir, seçili malzemeler tekrar düşer
     const refill = () => {
       remove("yesil");
-      const leaves = pieces("yesil-a", ZONE.yesil, { s: "leaf", c: "#5aa33d", n: 30 }) +
-                     pieces("yesil-b", ZONE.yesil, { s: "leaf", c: "#3f7f2e", n: 24 }, 0.1) +
-                     pieces("yesil-c", ZONE.yesil, { s: "leaf", c: "#8cc152", n: 14 }, 0.2);
-      add("yesil", "yesil", leaves);
-      // Önceki seçimleri de tekrar düşür
+      if (yesillik) add("yesil", "yesil", leaves());
       for (const [k, g] of live) if (k !== "yesil") {
         g.querySelectorAll(".pc, .sauce").forEach((el) => { el.style.animation = "none"; void el.getBBox(); el.style.animation = ""; });
       }

@@ -374,6 +374,14 @@
     }
     .opts.tiles .opt .tick { position: absolute; top: 10px; right: 10px; }
     .opts.tiles .opt small { font-size: 13px; font-weight: 800; opacity: .75; }
+    .opts.tiles.kap { grid-template-columns: 1fr 1fr; }
+    .opts.tiles.kap .opt { padding-left: 60px; min-height: 64px; justify-content: center; font-size: 16px; }
+    .kap-ic { position: absolute; left: 14px; top: 50%; width: 34px; height: 30px; transform: translateY(-50%); background: currentColor; }
+    .kap-bowl { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 30'%3E%3Cellipse cx='17' cy='9' rx='16' ry='4.5' fill='%23000'/%3E%3Cpath d='M1 10q1 16 16 16t16-16z' fill='%23000'/%3E%3Cpath d='M8 7q3-6 6-1 3-5 6 0 3-5 6 1' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+                mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 30'%3E%3Cellipse cx='17' cy='9' rx='16' ry='4.5' fill='%23000'/%3E%3Cpath d='M1 10q1 16 16 16t16-16z' fill='%23000'/%3E%3Cpath d='M8 7q3-6 6-1 3-5 6 0 3-5 6 1' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat; }
+    .kap-kova { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 30'%3E%3Cpath d='M6 11Q5-3 17-3t11 14' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cellipse cx='17' cy='11' rx='12' ry='3.5' fill='%23000'/%3E%3Cpath d='M5 11l3 17q9 2 18 0l3-17z' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat;
+                mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 30'%3E%3Cpath d='M6 11Q5-3 17-3t11 14' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cellipse cx='17' cy='11' rx='12' ry='3.5' fill='%23000'/%3E%3Cpath d='M5 11l3 17q9 2 18 0l3-17z' fill='%23000'/%3E%3C/svg%3E") center / contain no-repeat; }
+    .opts.tiles.kap .opt .tick { top: 50%; transform: translateY(-50%); right: 14px; }
 
     .sub { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
     .sub > div { overflow: hidden; }
@@ -414,6 +422,12 @@
     @keyframes shrink { to { opacity: 0; transform: scale(.5); } }
     .bowl-svg .sauce { stroke-dasharray: 1; stroke-dashoffset: 1; animation: pour .75s ease forwards .1s; }
     @keyframes pour { to { stroke-dashoffset: 0; } }
+    /* Bowl ↔ kova geçişi */
+    .bowl-svg .vessel { transform-origin: 200px 290px; transition: opacity .3s ease, transform .45s cubic-bezier(.3, 1.4, .5, 1); }
+    .bowl-svg .v-kova, .bowl-svg.is-kova .v-bowl { opacity: 0; transform: scale(.82, .55); }
+    .bowl-svg.is-kova .v-kova { opacity: 1; transform: none; }
+    .bowl-svg .contents { transform-origin: 200px 150px; transition: transform .45s cubic-bezier(.3, 1.3, .5, 1); }
+    .bowl-svg.is-kova .contents { transform: scale(.8, .79); }
     .bowl-svg .bowl-body.wiggle { transform-box: fill-box; transform-origin: 50% 100%; animation: wig .5s ease; }
     @keyframes wig {
       25% { transform: rotate(-2.2deg) translateY(2px); }
@@ -822,9 +836,9 @@
             ${photo(visual)}
             <div class="kbo-teaser-body">
               <ol class="steps-mini">
-                <li><b>1</b>Tahıl</li><li><b>2</b>Protein</li><li><b>3</b>${o.garnitur.dahil} garnitür</li><li><b>4</b>${o.sos.dahil} sos</li>
+                <li>Bowl / Kova</li><li><b>1</b>Tahıl</li><li><b>2</b>Protein</li><li><b>3</b>${o.garnitur.dahil} garnitür</li><li><b>4</b>${o.sos.dahil} sos</li>
               </ol>
-              <p>Yeşillik tabanının üstüne istediğin tahılı, proteini, garnitürleri ve sosu seç; fiyatın seçtikçe hesaplansın.</p>
+              <p>Yeşillikli bowl ya da yeşilliksiz kova seç, üstüne istediğin tahılı, proteini, garnitürleri ve sosu ekle; fiyatın seçtikçe hesaplansın.</p>
               <div class="from"><strong>${num(o.taban)} ₺</strong>'den başlayan fiyatlarla</div>
               <button type="button" class="cta" data-open-kbo>Bowlunu oluştur ${ARROW}</button>
             </div>
@@ -842,6 +856,11 @@
         return `
           <div class="kbo">
             <div class="kbo-steps">
+              <div class="step kap-step done">
+                <div class="step-h"><h3>Bowl mu, kova mı?</h3></div>
+                <div class="opts tiles kap">${o.kaplar.map((k) =>
+                  opt("kap", k.ad, `<span class="kap-ic kap-${fold(k.ad)}" aria-hidden="true"></span>${esc(k.ad)}<small>${esc(k.aciklama)}${k.ek ? ` · +${num(k.ek)} ₺` : ""}</small>`)).join("")}</div>
+              </div>
               ${step(1, "tahil", "Tahılını seç", `1 dahil · 2. tahıl +${o.ciftTahil} ₺`,
                 `<div class="opts">${o.tahillar.map((t) => opt("tahil", t)).join("")}</div>`)}
               ${step(2, "protein", "Proteinini seç", `Taban ${o.taban} ₺`,
@@ -873,13 +892,16 @@
         $("#kbo-body").innerHTML = builder(sec);
         const root = $("#kbo-modal");
         const art = window.BowlArt.mount($("#bowl-stage"));
-        const state = { tahil: [], protein: null, tur: null, garnitur: [], sos: [] };
+        const EMPTY = () => ({ kap: o.kaplar[0].ad, tahil: [], protein: null, tur: null, garnitur: [], sos: [] });
+        const state = EMPTY();
+        const kap = () => o.kaplar.find((k) => k.ad === state.kap) || o.kaplar[0];
         const prot = () => o.proteinler.find((p) => p.ad === state.protein);
 
         const calc = () => {
           const p = prot();
-          const lines = [{ l: "Yeşillik tabanı", v: "Dahil" }];
-          let total = o.taban;
+          const k = kap();
+          const lines = [{ l: k.yesillik ? `<b>${esc(k.ad)}</b> · yeşillik tabanı` : `<b>${esc(k.ad)}</b> · yeşilliksiz`, v: k.ek ? `+${num(k.ek)} ₺` : "Dahil" }];
+          let total = o.taban + (k.ek || 0);
           if (state.tahil.length) {
             lines.push({ l: `Tahıl: <b>${state.tahil.map(esc).join(" + ")}</b>`, v: state.tahil.length > 1 ? `+${o.ciftTahil} ₺` : "Dahil" });
             if (state.tahil.length > 1) total += o.ciftTahil;
@@ -959,7 +981,9 @@
           const b = e.target.closest(".opt");
           if (!b) return;
           const g = b.dataset.group, v = b.dataset.val;
-          if (g === "protein") {
+          if (g === "kap") {
+            state.kap = v;
+          } else if (g === "protein") {
             state.protein = state.protein === v ? null : v;
             state.tur = null;
           } else if (g === "tur") {
@@ -977,7 +1001,7 @@
         });
 
         $("#kbo-reset").addEventListener("click", () => {
-          Object.assign(state, { tahil: [], protein: null, tur: null, garnitur: [], sos: [] });
+          Object.assign(state, EMPTY());
           update();
           $("#kbo-body").scrollTo({ top: 0, behavior: "smooth" });
         });

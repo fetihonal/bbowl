@@ -42,10 +42,15 @@ window.MENU = [
   },
   {
     id: "kendi-bowlun", baslik: "Kendi Bowlunu Oluştur", renk: "neon", duzen: "kbo",
-    not: "Adım adım seç, fiyatın anında hesaplansın. Yeşillik tabanı her tabakta dahil.",
+    not: "Yeşillikli bowl ya da yeşilliksiz kova — adım adım seç, fiyatın anında hesaplansın.",
     // Oluşturucu seçenekleri — garnitür ve sos listeleri menüdeki bowl'lardan derlendi, gerekirse güncelleyin.
     secenekler: {
       taban: 150,
+      // Kap seçimi: bowl yeşillik tabanlı, kova yeşilliksiz. Kova için farklı fiyat varsa `ek` alanına yazın.
+      kaplar: [
+        { ad: "Bowl", aciklama: "Yeşillik tabanlı", yesillik: true, ek: 0 },
+        { ad: "Kova", aciklama: "Yeşilliksiz", yesillik: false, ek: 0 },
+      ],
       tahillar: ["Basmati", "Erişte", "Karabuğday"],
       ciftTahil: 25,
       proteinler: [
