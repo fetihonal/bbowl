@@ -13,12 +13,12 @@ window.MENU = [
     id: "bowllar", baslik: "Bowl'lar", renk: "bordo", duzen: "kart",
     urunler: [
       { ad: "Sporcu Bowl", icerik: "Yeşillik tabanı, basmati, tiftik tavuk (240 g), kinoa, bıldırcın yumurtası, cevizli brokoli, maş fasulyesi, roast sarımsaklı yoğurt sos", porsiyon: "620 g", kcal: 945, protein: 87, fiyat: 420, gorsel: "" },
-      { ad: "Vegan Bowl", icerik: "Yeşillik tabanı, basmati, falafel, humus, kırmızı lahana, maş fasulyesi, domates, limon-tahin sos", porsiyon: "530 g", kcal: 761, protein: 27, fiyat: 225, gorsel: "" },
+      { ad: "Vegan Bowl", icerik: "Yeşillik tabanı, basmati, falafel, humus, kırmızı lahana, maş fasulyesi, domates, limon-tahin sos", porsiyon: "530 g", kcal: 761, protein: 27, fiyat: 225, gorsel: "assets/bowl/vegan-bowl-kart.jpg" },
       { ad: "Asya Bowl", icerik: "Yeşillik tabanı, erişte, sweet chili tavuk, maş fasulyesi, kırmızı lahana, salatalık, mısır, sweet chili sos", porsiyon: "510 g", kcal: 558, protein: 30, fiyat: 235, gorsel: "" },
       { ad: "Sezar Bowl", icerik: "Yeşillik tabanı, basmati, tiftik tavuk, kruton, domates, mısır, salatalık, sezar sos", porsiyon: "495 g", kcal: 737, protein: 45, fiyat: 265, gorsel: "" },
       { ad: "Kremalı Mantarlı Bowl", icerik: "Yeşillik tabanı, erişte, kremalı mantarlı tavuk, cevizli brokoli, kuru domates, mısır, pesto sos", porsiyon: "470 g", kcal: 644, protein: 34, fiyat: 260, gorsel: "" },
       { ad: "Meksika Bowl", icerik: "Yeşillik tabanı, basmati, biberli salçalı tavuk, mısır, jalapeno, kırmızı lahana, tortilla cips, chipotle-lime sos", porsiyon: "460 g", kcal: 669, protein: 27, fiyat: 225, gorsel: "" },
-      { ad: "Anadolu Köfte Bowl", icerik: "Yeşillik tabanı, basmati, domates soslu köfte, kısır, kuru cacık, domates, kornişon turşu, acı yoğurt sos", porsiyon: "535 g", kcal: 686, protein: 29, fiyat: 455, gorsel: "" },
+      { ad: "Anadolu Köfte Bowl", icerik: "Yeşillik tabanı, basmati, domates soslu köfte, kısır, kuru cacık, domates, kornişon turşu, acı yoğurt sos", porsiyon: "535 g", kcal: 686, protein: 29, fiyat: 455, gorsel: "assets/bowl/anadolu-kofte-bowl-kart.jpg" },
       { ad: "Ton Balıklı Bowl", icerik: "Yeşillik tabanı, basmati, ton balığı, mısır, salatalık, bıldırcın yumurtası, kornişon turşu, ballı hardal sos", porsiyon: "465 g", kcal: 675, protein: 42, fiyat: 455, gorsel: "" },
       { ad: "Akdeniz Falafel Bowl", icerik: "Yeşillik tabanı, karabuğday, falafel, kuru cacık, pancar, salatalık, kuru domates, roast sarımsaklı yoğurt sos", porsiyon: "520 g", kcal: 603, protein: 29, fiyat: 210, gorsel: "" },
       { ad: "Glow Bowl", icerik: "Yeşillik tabanı, basmati, sweet chili tavuk, kinoa, pancar, cevizli brokoli, salatalık, limon-tahin sos", porsiyon: "540 g", kcal: 667, protein: 30, fiyat: 250, gorsel: "" },
@@ -36,8 +36,8 @@ window.MENU = [
   {
     id: "salatalar", baslik: "Salatalar", renk: "mavi", duzen: "kart",
     urunler: [
-      { ad: "Tavuklu Sezar Salata", icerik: "Tiftik tavuk (270 g), çeri domates, marul, kruton, sezar sos", porsiyon: "420 g", kcal: 686, protein: 89, fiyat: 200, gorsel: "" },
-      { ad: "Ton Balıklı Salata", icerik: "Ton balığı, yeşillik, çeri domates, salatalık, mısır, kırmızı soğan, zeytin, zeytinyağlı-limonlu sos", porsiyon: "~405 g", kcal: 449, protein: 36, fiyat: 240, yeni: true, gorsel: "" },
+      { ad: "Tavuklu Sezar Salata", icerik: "Tiftik tavuk (270 g), çeri domates, marul, kruton, sezar sos", porsiyon: "420 g", kcal: 686, protein: 89, fiyat: 200, gorsel: "assets/salatalar/tavuklu-sezar-salata-kart.jpg" },
+      { ad: "Ton Balıklı Salata", icerik: "Ton balığı, yeşillik, çeri domates, salatalık, mısır, kırmızı soğan, zeytin, zeytinyağlı-limonlu sos", porsiyon: "~405 g", kcal: 449, protein: 36, fiyat: 240, yeni: true, gorsel: "assets/salatalar/ton-balikli-salata-kart.jpg" },
     ],
   },
   {
