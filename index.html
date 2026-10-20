@@ -416,41 +416,154 @@
     .total strong { font-size: 34px; font-weight: 900; letter-spacing: -.03em; color: var(--sari); display: inline-block; }
     .bump { animation: bump .4s ease; }
     @keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.18) rotate(-3deg); } 100% { transform: scale(1); } }
-    .receipt-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 10px; }
-    .receipt-actions small { font-size: 12px; color: rgba(252, 241, 231, .6); }
-    .reset {
-      font: 700 13px var(--display);
-      color: var(--krem); background: transparent;
-      border: 1.5px solid rgba(252, 241, 231, .3);
-      border-radius: 999px; padding: 8px 14px; cursor: pointer;
-    }
-    .reset:hover { border-color: var(--krem); }
     .ready { display: none; margin-top: 12px; font-size: 13px; font-weight: 700; background: var(--neon); color: var(--bordo); border-radius: var(--r-sm); padding: 10px 12px; }
     .receipt.complete .ready { display: block; animation: slide .3s ease both; }
 
-    /* Mobil alt fiyat çubuğu */
-    .kbo-bar {
-      position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 70;
-      display: flex; align-items: center; gap: 12px;
-      background: var(--bordo); color: var(--krem);
+    /* Menüdeki tanıtım kartı */
+    .kbo-teaser {
+      display: grid; gap: 0;
+      background: var(--krem-2);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    @media (min-width: 760px) { .kbo-teaser { grid-template-columns: 1fr 1.1fr; } }
+    .kbo-teaser .ph { aspect-ratio: 16 / 10; height: 100%; }
+    .kbo-teaser-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .kbo-teaser-body p { font-size: 14px; line-height: 1.5; color: var(--muted); }
+    .kbo-teaser-body .from { font-size: 14px; font-weight: 700; }
+    .kbo-teaser-body .from strong { font-size: 26px; font-weight: 900; letter-spacing: -.02em; }
+    .steps-mini { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
+    .steps-mini li { font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px; background: var(--krem); border: 1px solid var(--line); }
+    .steps-mini b { color: var(--bordo); opacity: .5; margin-right: 4px; }
+    .cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 800 16px var(--display);
+      color: var(--krem); background: var(--bordo);
+      border: 0; border-radius: 999px;
+      padding: 16px 22px; cursor: pointer;
+      transition: transform .15s;
+    }
+    .cta:active { transform: scale(.97); }
+    .cta svg { width: 18px; height: 18px; transition: transform .2s; }
+    .cta:hover svg { transform: translateX(3px); }
+
+    /* Sabit "Kendi bowlunu oluştur" butonu */
+    .fab {
+      position: fixed; z-index: 80;
+      left: 50%; bottom: calc(14px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 10px;
+      font: 800 15px var(--display);
+      color: var(--bordo); background: var(--neon);
+      border: 2px solid var(--bordo);
       border-radius: 999px;
-      padding: 8px 8px 8px 20px;
-      box-shadow: 0 10px 30px rgba(85, 6, 31, .35);
-      transform: translateY(140%);
-      transition: transform .35s cubic-bezier(.3, 1.3, .5, 1);
+      padding: 10px 12px 10px 14px;
+      box-shadow: 0 10px 28px rgba(85, 6, 31, .3);
+      cursor: pointer;
+      white-space: nowrap;
+      animation: fab-in .5s cubic-bezier(.3, 1.4, .5, 1) both .3s;
+      transition: transform .2s;
     }
-    .kbo-bar.show { transform: none; }
-    .kbo-bar .lbl { font-size: 12px; font-weight: 700; opacity: .75; }
-    .kbo-bar strong { font-size: 22px; font-weight: 900; color: var(--sari); display: inline-block; }
-    .kbo-bar button {
-      margin-left: auto;
-      font: 800 14px var(--display);
-      background: var(--neon); color: var(--bordo);
-      border: 0; border-radius: 999px; padding: 12px 18px; cursor: pointer;
+    .fab:hover { transform: translateX(-50%) translateY(-2px); }
+    .fab:active { transform: translateX(-50%) scale(.96); }
+    .fab .ring-ic { width: 26px; aspect-ratio: 486 / 368; --src: url(assets/logo-mark.png); color: var(--bordo); }
+    .fab .fab-total {
+      font-size: 13px; font-weight: 900;
+      background: var(--bordo); color: var(--sari);
+      padding: 5px 9px; border-radius: 999px;
     }
-    @media (min-width: 900px) { .kbo-bar { display: none; } }
-    body.kbo-on .to-top { opacity: 0; pointer-events: none; }
-    @media (min-width: 900px) { body.kbo-on .to-top.show { opacity: 1; pointer-events: auto; } }
+    .fab .fab-total:empty { display: none; }
+    .fab:not(:has(.fab-total:not(:empty))) { padding-right: 18px; }
+    @keyframes fab-in { from { opacity: 0; transform: translateX(-50%) translateY(30px); } to { opacity: 1; transform: translateX(-50%); } }
+    body.modal-open .fab { display: none; }
+
+    /* Modal */
+    .modal { position: fixed; inset: 0; z-index: 100; display: none; }
+    .modal.open { display: block; }
+    .modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(40, 3, 15, .55);
+      -webkit-backdrop-filter: blur(4px);
+              backdrop-filter: blur(4px);
+      animation: fade .25s ease both;
+    }
+    .modal-panel {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: calc(100% - 28px - env(safe-area-inset-top));
+      background: var(--krem);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 -10px 40px rgba(40, 3, 15, .3);
+      animation: sheet-up .38s cubic-bezier(.2, 1, .3, 1) both;
+    }
+    @media (min-width: 900px) {
+      .modal-panel {
+        left: 50%; top: 50%; bottom: auto;
+        width: min(1080px, calc(100% - 48px));
+        height: min(820px, calc(100% - 48px));
+        border-radius: var(--r-lg);
+        transform: translate(-50%, -50%);
+        animation: pop-in .32s cubic-bezier(.2, 1.2, .4, 1) both;
+      }
+    }
+    .modal.closing .modal-backdrop { animation: fade .2s ease reverse both; }
+    .modal.closing .modal-panel { animation: sheet-down .22s ease-in both; }
+    @media (min-width: 900px) { .modal.closing .modal-panel { animation: pop-out .18s ease-in both; } }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+    @keyframes sheet-down { from { transform: none; } to { transform: translateY(100%); } }
+    @keyframes pop-in { from { opacity: 0; transform: translate(-50%, -46%) scale(.96); } to { opacity: 1; transform: translate(-50%, -50%); } }
+    @keyframes pop-out { from { opacity: 1; transform: translate(-50%, -50%); } to { opacity: 0; transform: translate(-50%, -48%) scale(.97); } }
+    @media (prefers-reduced-motion: reduce) { .modal *, .fab { animation: none !important; } }
+
+    .modal-head {
+      flex: none;
+      background-color: var(--bordo); color: var(--krem);
+      padding: 18px 20px 16px;
+      position: relative;
+    }
+    .modal-head::before {
+      content: ""; position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+      width: 40px; height: 4px; border-radius: 4px; background: rgba(252, 241, 231, .3);
+    }
+    @media (min-width: 900px) { .modal-head::before { display: none; } }
+    .modal-head h2 { font-weight: 900; font-size: clamp(22px, 5vw, 30px); letter-spacing: -.03em; text-transform: uppercase; line-height: 1; padding-right: 48px; }
+    .modal-head p { font-size: 13px; font-weight: 600; opacity: .75; margin-top: 6px; }
+    .modal-head .bar { margin: 14px 0 0; }
+    .modal-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 0; cursor: pointer;
+      background: rgba(252, 241, 231, .12); color: var(--krem);
+      display: grid; place-items: center;
+      transition: background .2s, transform .2s;
+    }
+    .modal-close:hover { background: rgba(252, 241, 231, .22); transform: rotate(90deg); }
+    .modal-close svg { width: 18px; height: 18px; }
+    .modal-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 16px; }
+    @media (min-width: 900px) { .modal-body { padding: 20px; } .kbo-sum { top: 0; } }
+    .modal-foot {
+      flex: none;
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: var(--krem-2);
+      border-top: 1px solid var(--line);
+    }
+    .modal-foot .lbl { font-size: 12px; font-weight: 700; color: var(--muted); }
+    .modal-foot strong { font-size: 26px; font-weight: 900; letter-spacing: -.02em; display: inline-block; white-space: nowrap; color: var(--bordo); }
+    .modal-foot button { white-space: nowrap; }
+    .modal-foot .btns { margin-left: auto; display: flex; gap: 8px; }
+    .modal-foot .ghost {
+      font: 700 14px var(--display); color: var(--bordo);
+      background: transparent; border: 1.5px solid var(--line);
+      border-radius: 999px; padding: 12px 16px; cursor: pointer;
+    }
+    .modal-foot .cta { padding: 13px 20px; font-size: 15px; }
+    .modal-foot .cta[disabled] { opacity: .45; cursor: not-allowed; }
+    .modal-foot .cta.ready { background: var(--neon); color: var(--bordo); animation: pop .35s ease; }
+    html.lock, html.lock body { overflow: hidden; }
 
     .empty {
       display: none;
@@ -466,7 +579,7 @@
       background-color: var(--bordo);
       color: var(--krem);
       border-radius: var(--r-lg) var(--r-lg) 0 0;
-      padding: 44px 0 calc(32px + env(safe-area-inset-bottom));
+      padding: 44px 0 calc(96px + env(safe-area-inset-bottom));
     }
     .foot { display: grid; gap: 26px; }
     @media (min-width: 820px) { .foot { grid-template-columns: auto 1fr; gap: 56px; align-items: start; } }
@@ -484,7 +597,7 @@
     .palette i { width: 14px; height: 14px; border-radius: 4px; display: block; }
 
     .to-top {
-      position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 60;
+      position: fixed; right: 16px; bottom: calc(84px + env(safe-area-inset-bottom)); z-index: 60;
       width: 48px; height: 48px; border-radius: 50%;
       border: 0; cursor: pointer;
       background: var(--bordo); color: var(--krem);
@@ -547,9 +660,32 @@
     </div>
   </footer>
 
-  <div class="kbo-bar" id="kbo-bar" aria-live="polite">
-    <div><div class="lbl">Senin bowlun</div><strong id="kbo-bar-total"></strong></div>
-    <button type="button" id="kbo-bar-btn">Özeti gör</button>
+  <button type="button" class="fab" data-open-kbo aria-haspopup="dialog">
+    <span class="ring-ic logo-mask" aria-hidden="true"></span>
+    Kendi bowlunu oluştur
+    <span class="fab-total" id="fab-total"></span>
+  </button>
+
+  <div class="modal" id="kbo-modal" role="dialog" aria-modal="true" aria-labelledby="kbo-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <header class="modal-head grid-bg">
+        <h2 id="kbo-title">Kendi bowlunu oluştur</h2>
+        <p id="kbo-left">Adım adım seç</p>
+        <div class="bar"><span id="kbo-progress"></span></div>
+        <button type="button" class="modal-close" id="kbo-close" data-close aria-label="Kapat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </header>
+      <div class="modal-body" id="kbo-body"></div>
+      <div class="modal-foot">
+        <div><div class="lbl">Toplam</div><strong id="kbo-foot-total"></strong></div>
+        <div class="btns">
+          <button type="button" class="ghost" id="kbo-reset">Sıfırla</button>
+          <button type="button" class="cta" id="kbo-done"></button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <button class="to-top" id="to-top" type="button" aria-label="Yukarı çık">
@@ -613,18 +749,39 @@
       const opt = (group, val, inner = esc(val)) =>
         `<button type="button" class="opt" data-group="${group}" data-val="${esc(val)}" aria-pressed="false">${TICK}${inner}</button>`;
 
+      const ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+
+      // Menüdeki bölüm: kısa tanıtım + modalı açan buton
       const kbo = (sec) => {
         const o = sec.secenekler;
         const visual = sec.urunler.find((u) => u.gorsel) || {};
         const keywords = [sec.baslik, ...sec.urunler.map(searchText), ...o.tahillar, ...o.garnitur.liste, ...o.sos.liste,
           ...o.proteinler.flatMap((p) => [p.ad, ...(p.turler || [])])].join(" ");
+        return `
+          <div class="kbo-teaser item" data-q="${esc(fold(keywords))}">
+            ${photo(visual)}
+            <div class="kbo-teaser-body">
+              <ol class="steps-mini">
+                <li><b>1</b>Tahıl</li><li><b>2</b>Protein</li><li><b>3</b>${o.garnitur.dahil} garnitür</li><li><b>4</b>${o.sos.dahil} sos</li>
+              </ol>
+              <p>Yeşillik tabanının üstüne istediğin tahılı, proteini, garnitürleri ve sosu seç; fiyatın seçtikçe hesaplansın.</p>
+              <div class="from"><strong>${num(o.taban)} ₺</strong>'den başlayan fiyatlarla</div>
+              <button type="button" class="cta" data-open-kbo>Bowlunu oluştur ${ARROW}</button>
+            </div>
+          </div>`;
+      };
+
+      // Modal içindeki oluşturucu
+      const builder = (sec) => {
+        const o = sec.secenekler;
+        const visual = sec.urunler.find((u) => u.gorsel) || {};
         const step = (n, key, title, hint, content) => `
           <div class="step" data-step="${key}">
             <div class="step-h"><span class="step-n">${n}</span><h3>${title}</h3><span class="hint">${hint}</span></div>
             ${content}
           </div>`;
         return `
-          <div class="kbo item" data-q="${esc(fold(keywords))}">
+          <div class="kbo">
             <div class="kbo-steps">
               ${step(1, "tahil", "Tahılını seç", `1 dahil · 2. tahıl +${o.ciftTahil} ₺`,
                 `<div class="opts">${o.tahillar.map((t) => opt("tahil", t)).join("")}</div>`)}
@@ -644,14 +801,9 @@
               ${photo(visual, "kbo-visual")}
               <div class="receipt" id="receipt">
                 <h3>Senin bowlun</h3>
-                <div class="bar"><span id="kbo-progress"></span></div>
                 <ul class="lines" id="kbo-lines"></ul>
                 <div class="total"><span>Toplam</span><strong id="kbo-total">${o.taban} ₺</strong></div>
                 <div class="ready">Bowlun hazır! Bu ekranı kasada göstermen yeterli.</div>
-                <div class="receipt-actions">
-                  <small id="kbo-left"></small>
-                  <button type="button" class="reset" id="kbo-reset">Sıfırla</button>
-                </div>
               </div>
             </aside>
           </div>`;
@@ -659,7 +811,8 @@
 
       const initBuilder = (sec) => {
         const o = sec.secenekler;
-        const root = document.getElementById(sec.id);
+        $("#kbo-body").innerHTML = builder(sec);
+        const root = $("#kbo-modal");
         const state = { tahil: [], protein: null, tur: null, garnitur: [], sos: [] };
         const prot = () => o.proteinler.find((p) => p.ad === state.protein);
 
@@ -725,15 +878,20 @@
           const steps = Object.keys(done).length;
           $("#kbo-progress").style.width = `${(complete / steps) * 100}%`;
           $("#receipt").classList.toggle("complete", complete === steps);
-          $("#kbo-left").textContent = complete === steps ? "" : `${steps - complete} adım kaldı`;
+          const doneBtn = $("#kbo-done");
+          doneBtn.classList.toggle("ready", complete === steps);
+          doneBtn.innerHTML = complete === steps ? `Hazır ${TICK.replace('class="tick"', "")}` : `Devam ${ARROW}`;
+          $("#kbo-left").textContent = complete ? `${complete}/${steps} adım` : "Adım adım seç";
 
           const { lines, total } = calc();
           $("#kbo-lines").innerHTML = lines.map((x) =>
             `<li class="${x.muted ? "muted" : ""}"><span>${x.l}</span>${x.v ? `<span class="pr">${x.v}</span>` : ""}</li>`).join("");
           const t = `${num(total)} ₺`;
           $("#kbo-total").textContent = t;
-          $("#kbo-bar-total").textContent = t;
-          if (total !== last) { bump($("#kbo-total")); bump($("#kbo-bar-total")); last = total; }
+          $("#kbo-foot-total").textContent = t;
+          const touched = state.tahil.length || state.protein || state.garnitur.length || state.sos.length;
+          $("#fab-total").textContent = touched ? t : "";
+          if (total !== last) { bump($("#kbo-total")); bump($("#kbo-foot-total")); last = total; }
         };
 
         root.addEventListener("click", (e) => {
@@ -760,15 +918,41 @@
         $("#kbo-reset").addEventListener("click", () => {
           Object.assign(state, { tahil: [], protein: null, tur: null, garnitur: [], sos: [] });
           update();
+          $("#kbo-body").scrollTo({ top: 0, behavior: "smooth" });
         });
-        $("#kbo-bar-btn").addEventListener("click", () => $("#kbo-sum").scrollIntoView({ block: "center" }));
+        $("#kbo-done").addEventListener("click", () => {
+          if ($("#kbo-done").classList.contains("ready")) $("#kbo-sum").scrollIntoView({ behavior: "smooth", block: "start" });
+          else {
+            // Eksik ilk adıma götür
+            const next = [...root.querySelectorAll(".step")].find((st) => !st.classList.contains("done"));
+            next?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
 
-        // Bölüm ekrandayken mobilde alt fiyat çubuğunu göster
-        const bar = $("#kbo-bar");
-        new IntersectionObserver(([en]) => {
-          bar.classList.toggle("show", en.isIntersecting);
-          document.body.classList.toggle("kbo-on", en.isIntersecting);
-        }, { rootMargin: "-30% 0px -30% 0px" }).observe(root.querySelector(".kbo-steps"));
+        // Modal aç / kapa
+        let lastFocus = null;
+        const open = () => {
+          lastFocus = document.activeElement;
+          root.classList.remove("closing");
+          root.classList.add("open");
+          document.documentElement.classList.add("lock");
+          document.body.classList.add("modal-open");
+          $("#kbo-close").focus({ preventScroll: true });
+        };
+        const close = () => {
+          if (!root.classList.contains("open")) return;
+          root.classList.add("closing");
+          setTimeout(() => {
+            root.classList.remove("open", "closing");
+            document.documentElement.classList.remove("lock");
+            document.body.classList.remove("modal-open");
+            lastFocus?.focus?.({ preventScroll: true });
+          }, 200);
+        };
+        document.addEventListener("click", (e) => { if (e.target.closest("[data-open-kbo]")) open(); });
+        root.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", close));
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+        if (location.hash === "#olustur") open();
 
         update();
       };
